@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 1921393518994595426, guid: 7d34d439cd682f64fb08dbc119a43522,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5080658089240384594, guid: 7d34d439cd682f64fb08dbc119a43522,
         type: 3}
@@ -685,12 +685,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12dcec8dfb870304195fa67539e42654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 60
-  _TimerCountdown: {fileID: 0}
-  _onTimerChange:
+  _maxTime: 60
+  _timerCountdown: {fileID: 0}
+  OnTimerChange:
     m_PersistentCalls:
       m_Calls: []
-  _onTimerEnd:
+  OnTimerEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimerStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFadeOutRequested:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFadeInRequested:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &501220630
@@ -843,7 +852,7 @@ PrefabInstance:
     - target: {fileID: 7379030604472610249, guid: b7dfcbc86ce6bda4593c1ba2e908d549,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8031940578943490374, guid: b7dfcbc86ce6bda4593c1ba2e908d549,
         type: 3}
@@ -1623,8 +1632,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6767a352f0fe09488f9949fabf0130a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPreFab: {fileID: 1959140607715349212, guid: 48b700f8ad7cc0c419f181b729a428d8,
-    type: 3}
   _spawnLocation: {fileID: 651311978}
   _gizmoRadius: 10
   _playerLayer:
@@ -2009,10 +2016,65 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 129149598190714702, guid: 0186876703bb3be4ab17ce82be4a5245,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 129149598190714702, guid: 0186876703bb3be4ab17ce82be4a5245,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 129149598190714702, guid: 0186876703bb3be4ab17ce82be4a5245,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 129149598190714702, guid: 0186876703bb3be4ab17ce82be4a5245,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 129149598190714702, guid: 0186876703bb3be4ab17ce82be4a5245,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 129149598190714702, guid: 0186876703bb3be4ab17ce82be4a5245,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 129149598190714702, guid: 0186876703bb3be4ab17ce82be4a5245,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 129149598190714702, guid: 0186876703bb3be4ab17ce82be4a5245,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509150483765825950, guid: 0186876703bb3be4ab17ce82be4a5245,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185191173539709731, guid: 0186876703bb3be4ab17ce82be4a5245,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 125
+      objectReference: {fileID: 0}
     - target: {fileID: 6547881946339418399, guid: 0186876703bb3be4ab17ce82be4a5245,
         type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7125916297052255308, guid: 0186876703bb3be4ab17ce82be4a5245,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 8699706280691961876, guid: 0186876703bb3be4ab17ce82be4a5245,
         type: 3}

@@ -12,7 +12,7 @@ using UnityEngine.Events;
 public class WinningUI : MonoBehaviour
 {    
     [SerializeField] private TextMeshProUGUI _timerText;
-    [SerializeField] private CountdownTimer _timer;
+    [SerializeField] private Timer _timer;
 
     private CanvasGroup _canvasGroup;
 
@@ -36,7 +36,7 @@ public class WinningUI : MonoBehaviour
         StartCoroutine("FadeIn");
         _canvasGroup.interactable = true;
 
-        float timer = _timer.GetTime();        
+        float timer = _timer.CurrentTime;       
         string timerString = timer.ToString("F3");
         _timerText.text = $"Il tuo tempo: {timerString}";
 
