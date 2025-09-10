@@ -9,76 +9,56 @@ using UnityEngine.SceneManagement;
 // Classe generica Singleton
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T _instance;
-    private static readonly object _lock = new object();
-    private static bool _applicationIsQuitting = false;
+    private static T instance;
+
+    private static bool isApplicationQuitting = false;
+    public virtual bool IsDestroyedOnLoad() => false;
 
     public static T Instance
     {
         get
         {
-            if (_applicationIsQuitting)
+            if (instance == null)
             {
-                Debug.LogWarning($"[Singleton] Instance '{typeof(T)}' already destroyed on application quit. Won't create again - returning null.");
-                return null;
-            }
-
-            lock (_lock)
-            {
-                if (_instance == null)
+                FindAnyObjectByType(typeof(T));
+                if (instance == null && !isApplicationQuitting)
                 {
-                    _instance = FindObjectOfType<T>();
-
-                    if (FindObjectsOfType<T>().Length > 1)
-                    {
-                        Debug.LogError($"[Singleton] Something went really wrong - there should never be more than 1 singleton! Reopening the scene might fix it.");
-                        return _instance;
-                    }
-
-                    if (_instance == null)
-                    {
-                        GameObject singleton = new GameObject();
-                        _instance = singleton.AddComponent<T>();
-                        singleton.name = "(singleton) " + typeof(T).ToString();
-
-                        Debug.Log($"[Singleton] An instance of {typeof(T)} is needed in the scene, so '{singleton}' was created.");
-                    }
+                    GameObject gameObj = new GameObject(typeof(T).Name + "_Singleton");
+                    instance = gameObj.AddComponent<T>();
+                    Debug.Log($"Generating new Singleton: {gameObj.name}");
                 }
-
-                return _instance;
             }
+            return instance;
         }
     }
 
-    protected virtual void Awake()
+    public virtual void Awake()
     {
-        if (_instance == null)
+        if (instance == null)
         {
-            _instance = this as T;
-
-            // Chiamata virtuale per permettere alle classi derivate di personalizzare il comportamento
-            OnSingletonAwake();
+            instance = GetComponent<T>();
+            if (!IsDestroyedOnLoad())
+            {
+                DontDestroyOnLoad(gameObject);
+                Debug.Log("Creating Singleton: " + gameObject.name);
+            }
         }
-        else if (_instance != this)
+        else if (instance != null && instance != this)
         {
-            Debug.Log($"[Singleton] Another instance of {typeof(T)} already exists. Destroying this one.");
             Destroy(gameObject);
         }
     }
 
-    // Metodo virtuale che le classi derivate possono sovrascrivere
-    protected virtual void OnSingletonAwake() { }
-
-    protected virtual void OnApplicationQuit()
+    private void OnDestroy()
     {
-        _applicationIsQuitting = true;
+        if (instance == this)
+        {
+            instance = null;
+        }
     }
 
-    protected virtual void OnDestroy()
+    private void OnApplicationQuit()
     {
-        if (_instance == this)
-        {
-            _instance = null;
-        }
+        isApplicationQuitting = true;
     }
 }

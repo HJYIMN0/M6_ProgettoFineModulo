@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
 
     public Queue<Bullet> _bulletsQueue = new Queue<Bullet>();
-    private float _shootTimer = 0f; // Timer for shooting interval
+    private float _shootTimer = 0f; // TimeManager for shooting interval
     [SerializeField] protected Bullet _bulletPreFab { get; private set; } // Prefab for the bullet
     [SerializeField] private Transform _spawnLocation;
     [SerializeField] protected float _gizmoRadius = 10;

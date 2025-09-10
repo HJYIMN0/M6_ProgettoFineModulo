@@ -301,6 +301,8 @@ GameObject:
   - component: {fileID: 7529642478900310386}
   - component: {fileID: 6193989845807044552}
   - component: {fileID: 5261752673447162441}
+  - component: {fileID: 2841251906095831802}
+  - component: {fileID: 2782983324387962955}
   m_Layer: 5
   m_Name: WinningScenario_UI
   m_TagString: UI
@@ -403,9 +405,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477de07063e34fe4dbbd33f9635851cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 0}
-  _timerText: {fileID: 0}
-  _timer: {fileID: 0}
+  _timerText: {fileID: 6801025818447975338}
+  _OnWinLevel:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!225 &2841251906095831802
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611438328809189152}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &2782983324387962955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611438328809189152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9f6e0d75dd063849b8ab947066b9cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeTimer: 2
+  canvasGroup: {fileID: 2841251906095831802}
+  invisibleAlpha: 0
+  visibleAlpha: 1
 --- !u!1 &1630719066831206634
 GameObject:
   m_ObjectHideFlags: 0

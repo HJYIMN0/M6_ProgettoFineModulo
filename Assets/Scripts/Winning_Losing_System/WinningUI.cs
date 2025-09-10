@@ -12,45 +12,50 @@ using UnityEngine.Events;
 public class WinningUI : MonoBehaviour
 {    
     [SerializeField] private TextMeshProUGUI _timerText;
-    [SerializeField] private Timer _timer;
 
     private CanvasGroup _canvasGroup;
+    private CanvasGroupFader _canvasGroupFader;
+    private Timer _timer;
+    private TimeManager TimeInstance;    
 
     public UnityEvent _OnWinLevel;
 
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
-        if (_canvasGroup == null) Debug.Log("Manca il CanvasGroup!");
+        if (_canvasGroup == null)
+        {
+            Debug.Log("Manca il CanvasGroup!");
+            return;
+        }
+        _canvasGroupFader = GetComponent<CanvasGroupFader>();
+        if (_canvasGroupFader == null)
+        {
+            Debug.Log("Manca il CanvasGroupFader!");
+            return;
+        }
+
+        _timer = FindAnyObjectByType<Timer>();
+        if (_timer == null)
+        {
+            Debug.Log($"{gameObject.name} non è riuscito a trovare il Timer!");
+        }
     }
 
     private void Start()
     {
+        TimeInstance = TimeManager.Instance;
         _canvasGroup.alpha = 0;
         _canvasGroup.interactable = false;
     }
 
-
-    public void CallWinUI()
+    public void OnUICalled()
     {
-        StartCoroutine("FadeIn");
-        _canvasGroup.interactable = true;
-
-        float timer = _timer.CurrentTime;       
-        string timerString = timer.ToString("F3");
-        _timerText.text = $"Il tuo tempo: {timerString}";
-
+        _canvasGroupFader.CallFadeIn(_canvasGroupFader.FadeTimer);
+        _OnWinLevel?.Invoke();
+        _timerText.text = (_timer.CurrentTime - _timer.MaxTime ).ToString();
+        SaveSystem.Save(new SaveData());
     }
-
-    private IEnumerator FadeIn()
-    {
-        while (_canvasGroup.alpha < 1f)
-        {
-            _canvasGroup.alpha += Time.deltaTime;
-            yield return null;
-        }
-    }
-
     public void GoToNextLevel() => Debug.Log("I'm sorry, this is the only level available at the moment!");
     
     public void RetryLevel()
