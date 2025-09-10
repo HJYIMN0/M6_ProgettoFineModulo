@@ -13,7 +13,13 @@ public abstract class AbstractFader : MonoBehaviour
     {
         float alpha = GetCurrentAlpha();
         _fadeTimer = _fadeTimer <= 0.01f ? 1f : _fadeTimer;
-        _isVisible = alpha > 0f;
+        _isVisible = alpha > 0.1f;
+    }
+
+    public void SetVisibilityState(bool value)
+    {
+        if (_isVisible != value)
+            _isVisible = value;
     }
 
     public virtual void CallFadeOut(float timer)
@@ -31,9 +37,13 @@ public abstract class AbstractFader : MonoBehaviour
     // Coroutine generica
     protected virtual IEnumerator FadeOut(float timer)
     {
+        Debug.Log($"FadeIn chiamato - _isVisible: {_isVisible}");
+
         if (!_isVisible) yield break;
         _isFading = true;
         float elapsed = 0f;
+
+        Debug.Log($"Iniziando fade da {GetVisibleAlpha()} a {GetInvisibleAlpha()}");
 
         while (elapsed < timer)
         {
@@ -44,20 +54,26 @@ public abstract class AbstractFader : MonoBehaviour
         }
 
         ApplyAlpha(GetInvisibleAlpha());
+        Debug.Log($"Fade completato - Alpha finale: {GetInvisibleAlpha()}");
         _isVisible = false;
         _isFading = false;
     }
 
     protected virtual IEnumerator FadeIn(float timer)
     {
+        Debug.Log($"FadeIn chiamato - _isVisible: {_isVisible}");
+
         if (_isVisible) yield break;
         _isFading = true;
         float elapsed = 0f;
+
+        Debug.Log($"Iniziando fade da {GetInvisibleAlpha()} a {GetVisibleAlpha()}");
 
         while (elapsed < timer)
         {
             float alpha = Mathf.Lerp(GetInvisibleAlpha(), GetVisibleAlpha(), elapsed / timer);
             ApplyAlpha(alpha);
+            
             elapsed += Time.deltaTime;
             yield return null;
         }

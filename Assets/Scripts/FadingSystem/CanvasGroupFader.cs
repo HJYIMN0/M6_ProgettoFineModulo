@@ -44,6 +44,7 @@ public class CanvasGroupFader : AbstractFader
         base.Awake();
     }
 
+
     protected override IEnumerator FadeIn(float timer)
     {
         yield return StartCoroutine(base.FadeIn(timer));

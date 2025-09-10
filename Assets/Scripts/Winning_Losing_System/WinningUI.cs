@@ -47,6 +47,8 @@ public class WinningUI : MonoBehaviour
         TimeInstance = TimeManager.Instance;
         _canvasGroup.alpha = 0;
         _canvasGroup.interactable = false;
+        _canvasGroup.blocksRaycasts = false;
+        _canvasGroupFader.SetVisibilityState(false);
     }
 
     public void OnUICalled()
