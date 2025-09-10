@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5168258154104161120}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameOver_UI, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5168258154104161120}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameOver_UI, Assembly-CSharp
         m_MethodName: RestartScene
         m_Mode: 1
@@ -356,7 +356,8 @@ GameObject:
   - component: {fileID: 8160080787392342965}
   - component: {fileID: 1010912942334044854}
   - component: {fileID: 641659974561497074}
-  - component: {fileID: 5168258154104161120}
+  - component: {fileID: 3321679450524053960}
+  - component: {fileID: 5210984837450631967}
   m_Layer: 5
   m_Name: GameOverCanva
   m_TagString: Untagged
@@ -459,7 +460,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &5168258154104161120
+--- !u!114 &3321679450524053960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -468,9 +469,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 7379030604472610249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4bb9eaaae645484790b5d2a10b3af5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f80484ffcd46d84b91103a42f3995db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5210984837450631967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7379030604472610249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9f6e0d75dd063849b8ab947066b9cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeTimer: 1
+  _isVisibleOnStart: 0
+  canvasGroup: {fileID: 641659974561497074}
+  invisibleAlpha: 0
+  visibleAlpha: 1
 --- !u!1 &7789008075705816238
 GameObject:
   m_ObjectHideFlags: 0

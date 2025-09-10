@@ -487,6 +487,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.86842924
       objectReference: {fileID: 0}
+    - target: {fileID: 152529853661212288, guid: 5b436433a6c424041b43f9fd009ed6df,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 246219970087919763, guid: 5b436433a6c424041b43f9fd009ed6df,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1061,7 +1066,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 837620046}
+      objectReference: {fileID: 0}
     - target: {fileID: 6841373928038686593, guid: 5b436433a6c424041b43f9fd009ed6df,
         type: 3}
       propertyPath: OnLifeChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1446,7 +1451,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _onAllCoinsCollected.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1907421285}
+      objectReference: {fileID: 0}
     - target: {fileID: 8280789992037342184, guid: c0d2cd9ee1e7a7d4f903b00d05fdd41d,
         type: 3}
       propertyPath: _onAllCoinsCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -1871,7 +1876,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _timer
       value: 
-      objectReference: {fileID: 1907421285}
+      objectReference: {fileID: 0}
     - target: {fileID: 5261752673447162441, guid: d41304d1ba3e5714aa8a71419f033bf7,
         type: 3}
       propertyPath: _timerText
@@ -1901,7 +1906,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _OnWinLevel.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1907421285}
+      objectReference: {fileID: 0}
     - target: {fileID: 5261752673447162441, guid: d41304d1ba3e5714aa8a71419f033bf7,
         type: 3}
       propertyPath: _OnWinLevel.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -2714,18 +2719,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &837620046 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5168258154104161120, guid: b7dfcbc86ce6bda4593c1ba2e908d549,
-    type: 3}
-  m_PrefabInstance: {fileID: 2014165177}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4bb9eaaae645484790b5d2a10b3af5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &844144877 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6637274518478002844, guid: f68b21ca6cbd0054dba7c21380c3431f,
@@ -14309,7 +14302,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _onTimerEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 837620046}
+      objectReference: {fileID: 0}
     - target: {fileID: 5666020002426112750, guid: 3a86cae45de7ab6468b6abdd7701e7de,
         type: 3}
       propertyPath: _onTimerEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -14435,18 +14428,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a86cae45de7ab6468b6abdd7701e7de, type: 3}
---- !u!114 &1907421285 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5666020002426112750, guid: 3a86cae45de7ab6468b6abdd7701e7de,
-    type: 3}
-  m_PrefabInstance: {fileID: 1907421284}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12dcec8dfb870304195fa67539e42654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1931407263
 GameObject:
   m_ObjectHideFlags: 0
@@ -14647,7 +14628,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004023062}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05c75a6c958ffc346ac236fae2fd8d9c, type: 3}
   m_Name: 
@@ -14833,7 +14814,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 837620046}
+      objectReference: {fileID: 0}
     - target: {fileID: 8783352402310755453, guid: b7dfcbc86ce6bda4593c1ba2e908d549,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName

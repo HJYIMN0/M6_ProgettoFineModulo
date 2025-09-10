@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class AbstractFader : MonoBehaviour
 {
     [SerializeField] private float _fadeTimer = 1f;
+    [SerializeField] protected bool _isVisibleOnStart = false;
     public bool _isVisible { get; private set; }
     public bool _isFading { get; private set; }
 
@@ -12,8 +13,8 @@ public abstract class AbstractFader : MonoBehaviour
     public virtual void Awake()
     {
         float alpha = GetCurrentAlpha();
-        _fadeTimer = _fadeTimer <= 0.01f ? 1f : _fadeTimer;
-        _isVisible = alpha > 0.1f;
+        _fadeTimer = _fadeTimer <= 0.5f ? 1f : _fadeTimer;
+        _isVisible = _isVisibleOnStart;
     }
 
     public void SetVisibilityState(bool value)

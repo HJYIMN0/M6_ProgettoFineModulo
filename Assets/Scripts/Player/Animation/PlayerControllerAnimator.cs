@@ -48,9 +48,9 @@ public class PlayerControllerAnimator : MonoBehaviour
         else
             _anim.SetBool("IsRunning", false);
 
-        Debug.Log("Walk " + _anim.GetBool("IsMoving"));
-        Debug.Log("Jump " + _anim.GetBool("IsJumping"));
-        Debug.Log("Run: " + _anim.GetBool("IsRunning"));
+        //Debug.Log("Walk " + _anim.GetBool("IsMoving"));
+        //Debug.Log("Jump " + _anim.GetBool("IsJumping"));
+        //Debug.Log("Run: " + _anim.GetBool("IsRunning"));
 
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class WinningTrigger : MonoBehaviour
 {
     [SerializeField] private WinningUI _winningUI;
+    private bool _hasCollectedAllCoins = false;
 
     public void Awake()
     {        
@@ -29,11 +30,9 @@ public class WinningTrigger : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void SetHasCollectedAllCoins(bool value)
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            _winningUI.OnUICalled();
-        }
+        if (value != _hasCollectedAllCoins)
+            _hasCollectedAllCoins = value;
     }
 }
