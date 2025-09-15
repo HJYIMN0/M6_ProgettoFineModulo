@@ -38,10 +38,10 @@ public class PlayerControllerAnimator : MonoBehaviour
         else
             _anim.SetBool("IsMoving", false);
 
-        if (_player._isJumping)
-            _anim.SetBool("IsJumping", true);
-        else
-            _anim.SetBool("IsJumping", true);
+        //if (_player._isJumping)
+        //    _anim.SetBool("IsJumping", true);
+        //else
+        //    _anim.SetBool("IsJumping", true);
 
         if (_player._isRunning)
             _anim.SetBool("IsRunning", true);

@@ -13,12 +13,19 @@ public class Coin : MonoBehaviour
     private bool _isCollected = false;
     //[SerializeField] private PlayerController _player;
     [SerializeField] private float _setActiveDelay = 2f;
-    private CoinManager _coinManager;
+
+    private GameManager GameManager => GameManager.Instance;
+    private CoinManager _coinManager => GameManager.CoinManager;
+
 
     private void Start()
     {
+        if (GameManager == null)
+        {
+            Debug.LogError($"{this.gameObject.name} could not find the GameManager!");
+            return;
+        }
         _isCollected = false;
-        _coinManager = FindObjectOfType<CoinManager>();
         if (_coinManager == null)
         {
             Debug.LogError($"{gameObject.name} can't find CoinManager in the scene.");
@@ -29,8 +36,8 @@ public class Coin : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponentInParent<PlayerController>().SetSecondJump(true);
-            other.GetComponentInParent<PlayerController>()._onSecondJump?.Invoke(true);
+            other.GetComponentInParent<PlayerJumpController>().SetSecondJump(true);
+            other.GetComponentInParent<PlayerJumpController>()._onSecondJump?.Invoke(true);
             if (!_isCollected)
             {
                 _coinManager?.IncreaseCollectedCoinsByValue(value);

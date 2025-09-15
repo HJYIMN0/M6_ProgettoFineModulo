@@ -8,6 +8,8 @@ public class SaveData
     public string username;
     public List<string> levelsCompleted;
     public int highScore;
+    public int collectedCoins;
+    public int totalCoinsCollected;
 
     public void UpdateCompletedLevels(string levelID)
     {

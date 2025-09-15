@@ -15,7 +15,7 @@
 //Completare il sistema di salvataggio con il vector 3
 //Aggiustare il sistema di raccolta monete con un CoinManager
 //Ricontrollare sistema sconfitta e vittoria, ho visto che c'era un problema col prefab e non ho riprovato
-//I.e. Aggiungi una linea che con input.getbutton fa comparire il fade in 
+//I.e. Aggiungi una linea che con input.getbutton fa comparire il fade in   
 
 
 
