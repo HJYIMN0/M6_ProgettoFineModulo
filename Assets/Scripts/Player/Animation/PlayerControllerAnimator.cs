@@ -22,7 +22,9 @@ public class PlayerControllerAnimator : MonoBehaviour
 
     void Update()
     {
-        _anim.SetFloat("xMovement", _playerInput.Movement.magnitude);
+        float xMove = _playerInput.IsTryingToJump() ? 0 : _playerInput.Movement.magnitude;
+        
+        _anim.SetFloat("xMovement", xMove);
         _anim.SetFloat("yMovement", _rb.velocity.y);
 
         _anim.SetBool("Charging", _playerInput.IsTryingToJump());
