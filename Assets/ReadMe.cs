@@ -2,12 +2,10 @@
 
 //DOING:
 //Sistema di monete
+//playermovement
+//PlayerParticlesSystem
 
 //TO DO:
-
-// MIGLIORARE IL MOVIMENTO DEL PLAYER, RENDENDOLO PIU' DIVERTENTE.
-//IMMAGINAVO UNA NUOVA MECCANICA PER CUI SE TIENI SCHIACCIATO IL TASTO PER SALTARE, RALLENTA E SI CARICA.
-//IN BASE A QUANTO HAI TENUTO PREMUTO, SALTA IN ALTO
 //MAGARI POTER FARE SALTARE DA ALCUNE PARETI
 //AGGIUNGERE IL SISTEMA DI SALVATAGGIO CHE HO FATTO PER LA BUILD WEEK
 //AGGIUNGERE UN GAME MANAGER CHE GESTISCA IL LIVELLO, L'AUDIO E ALTRO
@@ -18,8 +16,6 @@
 //I.e. Aggiungi una linea che con input.getbutton fa comparire il fade in   
 
 
-
-
 // Ho aggiunto i seguenti script:
 //AbstractFader
 //CanvasGroupFader
@@ -28,11 +24,15 @@
 //SaveData
 //Save_Monobehaviour
 //TimeManager
+//Player Input
+//PlayerJumpController
+//PlayerParticleSystem
 
 //Ho modificato i seguenti script:
 //TimeManager, rendendolo un singleton
 //CoinSystem, aggiungendo il CoinManager
 //Tolto Lo script dalla camera, sostituendolo con CineMachine
+//PlayerController, Separandolo in 3 differenti scirpts
 
 //Cosa rivedere in base alle modifiche:
 //Gli script di UI

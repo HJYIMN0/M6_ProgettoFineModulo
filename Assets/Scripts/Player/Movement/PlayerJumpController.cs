@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +12,9 @@ public class PlayerJumpController : MonoBehaviour
     [SerializeField] private float _secondJumpForce = 15f;
     [SerializeField] private float _maxChargeTime = 2f; // Tempo massimo per caricare il salto
 
-    [Header("Time Settings")]
+    [Header ("Time Settings")]
     [SerializeField] private float _timeWhileCharging = 0.3f;
 
-    [Header("Movement Settings")]
-    [SerializeField] private float _slowdownSpeed = 2.5f; // Velocità con cui il player rallenta durante la carica
 
     private TimeManager timeManager;
     private PlayerInput playerInput;
@@ -31,6 +30,7 @@ public class PlayerJumpController : MonoBehaviour
     // Second jump
     public bool _hasSecondJump { get; set; } = false;
     public UnityEvent<bool> _onSecondJump;
+    public Action OnMaxJumpCharge;
 
     private void Awake()
     {
@@ -95,6 +95,8 @@ public class PlayerJumpController : MonoBehaviour
 
     private void StartChargeJump()
     {
+
+        OnMaxJumpCharge?.Invoke();
         _isChargingJump = true;
         _chargeTime = 0f;
         _currentJumpForce = _jumpForce;
@@ -110,7 +112,7 @@ public class PlayerJumpController : MonoBehaviour
     }
 
     private void ChargeJump()
-    {
+    {        
         _chargeTime += Time.unscaledDeltaTime;
 
         float chargeProgress = Mathf.Clamp01(_chargeTime / _maxChargeTime);
@@ -118,20 +120,17 @@ public class PlayerJumpController : MonoBehaviour
 
         // Rallenta progressivamente il player mantenendo la direzione
         Vector3 horizontalVelocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
-        Vector3 deceleratedVelocity = Vector3.MoveTowards(horizontalVelocity, Vector3.zero, playerController._speedDeceleration * Time.fixedDeltaTime);
+        Vector3 deceleratedVelocity = Vector3.MoveTowards
+            (horizontalVelocity, Vector3.zero, playerController._speedDeceleration * Time.fixedDeltaTime);
         _rb.velocity = new Vector3(deceleratedVelocity.x, _rb.velocity.y, deceleratedVelocity.z);
-
-        // Rallenta anche la rotazione
-        _rb.angularVelocity = Vector3.MoveTowards(_rb.angularVelocity, Vector3.zero, playerController._speedDeceleration * Time.fixedDeltaTime);
-
-        Debug.Log($"Charging jump: {chargeProgress:P0} - Force: {_currentJumpForce:F1}");
     }
+  
 
 
     private void ExecuteJump()
     {
         if (!_isChargingJump) return;
-
+            
         // Esegui il salto con la forza calcolata
         _rb.velocity = new Vector3(_rb.velocity.x, _currentJumpForce, _rb.velocity.z);
 

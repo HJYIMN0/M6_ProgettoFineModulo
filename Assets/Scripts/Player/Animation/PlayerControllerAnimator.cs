@@ -6,52 +6,29 @@ using UnityEngine.Animations;
 public class PlayerControllerAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _anim;
-    [SerializeField] private PlayerController _player;
+    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private LifeController _lifeController;
-
-
+    
+    private bool isCoroutineRunning;
 
     void Awake()
     {
-
-        _anim = GetComponentInChildren<Animator>();
-        if (_anim == null)
+        if (_anim == null || _playerInput == null || _lifeController == null || _rb == null)
         {
-            
-            Debug.Log("Manca l'animator!");
-        }
-
-
-        if (_player == null)
-            _player = GetComponent<PlayerController>();
-
-        if (_lifeController == null)
-                _lifeController = GetComponent<LifeController>();
-
-
+            Debug.LogError($"You Forgot to assign the references from the inspecor in {this.gameObject.name}");
+        }        
     }
 
     void Update()
     {
-        if (_player._isMoving)
-            _anim.SetBool("IsMoving", true);
-        else
-            _anim.SetBool("IsMoving", false);
+        _anim.SetFloat("xMovement", _playerInput.Movement.magnitude);
+        _anim.SetFloat("yMovement", _rb.velocity.y);
 
-        //if (_player._isJumping)
-        //    _anim.SetBool("IsJumping", true);
-        //else
-        //    _anim.SetBool("IsJumping", true);
+        _anim.SetBool("Charging", _playerInput.IsTryingToJump());
+        _anim.SetBool("IsGrounded", _playerInput.IsGrounded());
 
-        if (_player._isRunning)
-            _anim.SetBool("IsRunning", true);
-        else
-            _anim.SetBool("IsRunning", false);
-
-        //Debug.Log("Walk " + _anim.GetBool("IsMoving"));
-        //Debug.Log("Jump " + _anim.GetBool("IsJumping"));
-        //Debug.Log("Run: " + _anim.GetBool("IsRunning"));
-
-    }
-
+        Debug.Log(_anim.GetFloat("xMovement"));
+        Debug.Log(_anim.GetBool("Charging"));
+    } 
 }

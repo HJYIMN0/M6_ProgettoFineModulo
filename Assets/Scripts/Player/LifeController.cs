@@ -4,6 +4,7 @@ using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using System;
 
 public class LifeController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class LifeController : MonoBehaviour
     [SerializeField] private bool _maxHpOnStart = true;
 
     public UnityEvent<int, int> OnLifeChanged; //hp, max hp
-    public UnityEvent _onDeath;
+    public Action _onDeath;
 
     public int GetHp() => _hp;
     public int GetMaxHp() => _maxHp;

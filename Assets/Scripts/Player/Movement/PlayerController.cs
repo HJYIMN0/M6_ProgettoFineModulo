@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.Events;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private Transform _cameraTransform;
     private Rigidbody _rb;
     private PlayerInput _playerInput;
+
+    public Action OnFullStop;
 
     // Movement state
     public bool _isMoving { get; private set; }
@@ -86,6 +89,8 @@ public class PlayerController : MonoBehaviour
 
             // Decelera la velocità angolare fino a zero
             _rb.angularVelocity = Vector3.Lerp(_rb.angularVelocity, Vector3.zero, _speedDeceleration * Time.fixedDeltaTime);
+
+            if (_rb.velocity.magnitude <= Mathf.Epsilon) OnFullStop.Invoke();
         }
     }
 

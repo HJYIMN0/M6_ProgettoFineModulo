@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class Coin : MonoBehaviour
 {
@@ -13,9 +14,17 @@ public class Coin : MonoBehaviour
     private bool _isCollected = false;
     //[SerializeField] private PlayerController _player;
     [SerializeField] private float _setActiveDelay = 2f;
+    [SerializeField] private float _rotationSpeed = 100f;
+
 
     private GameManager GameManager => GameManager.Instance;
-    private CoinManager _coinManager => GameManager.CoinManager;
+    private CoinManager _coinManager => GameManager.CoinManager;    
+
+    private void Update()
+    {
+        transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime);
+    }
+
 
 
     private void Start()
