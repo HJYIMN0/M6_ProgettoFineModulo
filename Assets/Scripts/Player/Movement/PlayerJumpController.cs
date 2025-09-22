@@ -103,7 +103,8 @@ public class PlayerJumpController : MonoBehaviour
 
         // Salva la velocità originale e rallenta il tempo
         _originalVelocity = _rb.velocity;
-        timeManager.SetTimeScale(_timeWhileCharging);
+
+        timeManager.CallTransitionTimeScale(timeManager.TimeScale, _timeWhileCharging, _maxChargeTime);
 
         // Disabilita il movimento del player controller durante la carica
         playerController.SetMovementEnabled(false);
@@ -165,7 +166,8 @@ public class PlayerJumpController : MonoBehaviour
         _currentJumpForce = _jumpForce;
 
         // Ripristina il tempo normale e riattiva il movimento
-        timeManager.SetTimeScale(1f);
+        timeManager.SetTimeScaleToStandard();
+        timeManager.StopAllTransitions();
         playerController.SetMovementEnabled(true);
     }
 

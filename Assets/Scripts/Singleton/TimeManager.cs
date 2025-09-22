@@ -4,15 +4,17 @@ using UnityEngine.Events;
 using System.Collections;
 using System;
 using UnityEngine.SceneManagement;
-public class TimeManager : Singleton<TimeManager>
+public class TimeManager : AbstractSingleton<TimeManager>
 {
     [SerializeField] private float _standardTimeScale = 1f;
-    [SerializeField] private string[] _scenesToSkipDontDestroy = {};
+    [SerializeField] private string[] _scenesToSkipDontDestroy = { };
 
 
     private bool _isRunning;
     private float _timeScale = 1f;
     private float _lastTimeScale;
+
+    private bool _isCoroutineRunning;
 
     public float StandardTimeScale => _standardTimeScale;
     public float TimeScale => _timeScale;
@@ -22,6 +24,7 @@ public class TimeManager : Singleton<TimeManager>
 
 
     public override bool IsDestroyedOnLoad() => false;
+    public override bool ShouldDetatchFromParent() => true;
 
     private void Start()
     {
@@ -73,4 +76,30 @@ public class TimeManager : Singleton<TimeManager>
         _lastTimeScale = _timeScale;
     }
 
+    public void CallTransitionTimeScale(float from, float to, float duration)
+    {
+        if (_isCoroutineRunning) return;
+        StartCoroutine(TransitionTimeScale(from, to, duration));
+    }
+
+    private IEnumerator TransitionTimeScale(float from, float to, float duration)
+    {
+        _isCoroutineRunning = true;
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float t = elapsedTime / duration;
+            SetTimeScale(Mathf.Lerp(from, to, t));
+            Debug.Log($"timescale = {Time.timeScale}");
+            yield return null;
+        }  
+        _isCoroutineRunning = false;
+    }
+
+    public void StopAllTransitions()
+    {
+        _isCoroutineRunning = false;
+        StopAllCoroutines();
+    }
 }

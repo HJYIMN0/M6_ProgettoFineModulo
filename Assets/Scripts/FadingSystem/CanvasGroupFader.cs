@@ -41,6 +41,13 @@ public class CanvasGroupFader : AbstractFader
             }
         }
 
+        if (!_isVisibleOnStart) 
+        {
+            canvasGroup.alpha = 0f;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+        }
+
         base.Awake();
     }
 

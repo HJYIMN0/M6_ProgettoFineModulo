@@ -161,6 +161,11 @@ PrefabInstance:
       propertyPath: m_YAxis.m_MaxSpeed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8184956144280532957, guid: 9a70823a19fc1f44fa5a1d3d4d1e4551,
+        type: 3}
+      propertyPath: m_XAxis.m_InvertInput
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8611277999320502816, guid: 9a70823a19fc1f44fa5a1d3d4d1e4551,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -180,6 +185,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.24218524
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146829024868782892, guid: 9a70823a19fc1f44fa5a1d3d4d1e4551,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.620069
       objectReference: {fileID: 0}
     - target: {fileID: 9146829024868782892, guid: 9a70823a19fc1f44fa5a1d3d4d1e4551,
         type: 3}

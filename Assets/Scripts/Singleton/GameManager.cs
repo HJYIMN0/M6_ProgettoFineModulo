@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : AbstractSingleton<GameManager>
 {
     public override bool IsDestroyedOnLoad() => true;
+    public override bool ShouldDetatchFromParent() => true;
     public GameObject Player { get; private set; }
     public CoinManager CoinManager { get; private set; }
 
@@ -12,8 +13,11 @@ public class GameManager : Singleton<GameManager>
 
     public WinningTrigger WinningTrigger { get; private set; }
 
-    private void Start()
+    public override void Awake()
     {
+        base.Awake();
+
+
         Debug.Log("GameManager started.");
 
         Player = GameObject.FindWithTag("Player");

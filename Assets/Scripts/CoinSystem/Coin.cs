@@ -10,22 +10,18 @@ public class Coin : MonoBehaviour
 {
     [SerializeField] private int value = 1;
     [SerializeField] public Func<int, int> _onCoinCollected;
-
     private bool _isCollected = false;
     //[SerializeField] private PlayerController _player;
     [SerializeField] private float _setActiveDelay = 2f;
     [SerializeField] private float _rotationSpeed = 100f;
 
-
     private GameManager GameManager => GameManager.Instance;
-    private CoinManager _coinManager => GameManager.CoinManager;    
+    private CoinManager _coinManager => GameManager.CoinManager;
 
     private void Update()
     {
         transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime);
     }
-
-
 
     private void Start()
     {
@@ -47,16 +43,16 @@ public class Coin : MonoBehaviour
         {
             other.GetComponentInParent<PlayerJumpController>().SetSecondJump(true);
             other.GetComponentInParent<PlayerJumpController>()._onSecondJump?.Invoke(true);
+
             if (!_isCollected)
             {
                 _coinManager?.IncreaseCollectedCoinsByValue(value);
-                Debug.Log("Coins Collected: " + _coinManager?.collectedCoins);
             }
-            _isCollected = true;
 
+            _isCollected = true;
             _onCoinCollected?.Invoke(value);
             gameObject.SetActive(false);
-            Debug.Log("Taken!");
+            Debug.Log("Coin Taken!");
         }
     }
 
@@ -69,10 +65,4 @@ public class Coin : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
-
-    //private void Update()
-    //{
-    //    Debug.Log(value);
-    //    Debug.Log($"score uguale a {score}");
-    //}
 }

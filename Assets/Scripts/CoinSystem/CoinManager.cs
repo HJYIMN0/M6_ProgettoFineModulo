@@ -5,35 +5,38 @@ using UnityEngine;
 public class CoinManager : MonoBehaviour
 {
     public int totalCoins { get; private set; }
-    public int collectedCoins { get; private set; } = 0;   
+    private static int collectedCoins;   
     
+    public int CollectedCoins => collectedCoins;
     private GameManager gameManager => GameManager.Instance;
     private SaveData saveData => gameManager.SaveData;
     private WinningTrigger winningTrigger => gameManager.WinningTrigger;
 
     public void Start()
     {
-
         GameObject[] coinObjects = GameObject.FindGameObjectsWithTag("Coin");
         if (coinObjects == null || coinObjects.Length == 0)
         {
             Debug.LogWarning("No coins found in the scene with the 'Coin' tag.");
             return;
         }
+
         //set total coins at start
         totalCoins = coinObjects.Length;
         Debug.Log("Total Coins in Scene: " + totalCoins);
-        
+
         if (winningTrigger == null)
         {
             Debug.LogError($"{gameObject.name} can't find WinningTrigger in the scene.");
         }
 
-        //reset collected coins for each individual level
-        collectedCoins = 0;
+        // RIMUOVI QUESTA RIGA che resetta sempre a 0
+        // collectedCoins = 0;
+
         if (saveData != null)
         {
-            saveData.collectedCoins = collectedCoins;
+            // Carica i coins raccolti dai dati salvati
+            collectedCoins = saveData.collectedCoins;
         }
         else
         {
@@ -41,6 +44,8 @@ public class CoinManager : MonoBehaviour
             collectedCoins = 0;
             SaveSystem.Save(new SaveData());
         }
+
+        Debug.Log("Starting with collected coins: " + collectedCoins);
     }
 
     public void IncreaseCollectedCoinsByValue(int value)

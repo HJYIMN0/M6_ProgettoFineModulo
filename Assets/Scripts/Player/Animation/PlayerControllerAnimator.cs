@@ -30,7 +30,7 @@ public class PlayerControllerAnimator : MonoBehaviour
         _anim.SetBool("Charging", _playerInput.IsTryingToJump());
         _anim.SetBool("IsGrounded", _playerInput.IsGrounded());
 
-        Debug.Log(_anim.GetFloat("xMovement"));
-        Debug.Log(_anim.GetBool("Charging"));
+        //Debug.Log(_anim.GetFloat("xMovement"));
+        //Debug.Log(_anim.GetBool("Charging"));
     } 
 }
