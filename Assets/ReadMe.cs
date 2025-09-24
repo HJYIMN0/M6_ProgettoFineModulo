@@ -63,7 +63,7 @@
 //gl ialtri dovevano fare copy from other avatar)
 
 //attenzione alla struttura del Player, le cose di logica dovrebbero essere nella root,
-//inoltre il GetComponentInChildren pescava l'animator sbagliato, perché inizia a cercare dal GameObject stesso
+//inoltre il GetComponentInChildren pescava l'_animator sbagliato, perché inizia a cercare dal GameObject stesso
 
 //nell' OnCollisionExit() del MovingPlatform _playerRb.velocity = _playerRb.velocity; non fa nulla
 

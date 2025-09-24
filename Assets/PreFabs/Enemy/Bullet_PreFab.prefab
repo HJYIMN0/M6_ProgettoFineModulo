@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 40287c8690e7f0d468f9bd7e5feb406e,
         type: 3}
       propertyPath: m_Name
-      value: Bullet 1
+      value: Bullet_PreFab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletData: {fileID: 11400000, guid: f88c2cf7a410ae64e8d7ade3cf89009d, type: 2}
-  _rb: {fileID: -1422117546784196052}
 --- !u!54 &-1422117546784196052
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -108,7 +107,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5107102793684358593}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.25
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

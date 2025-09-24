@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 952970a7a9e8b9743974baa52dda2b79, type: 3}
   m_Name: BulletStandard
   m_EditorClassIdentifier: 
-  _speed: 10
+  _speed: 13
   _lifeTime: 5
   _damage: 1
   _piercing: 0
