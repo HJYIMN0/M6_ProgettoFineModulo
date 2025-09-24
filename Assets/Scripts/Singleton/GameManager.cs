@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class GameManager : AbstractSingleton<GameManager>
 {
-    public override bool IsDestroyedOnLoad() => true;
-    public override bool ShouldDetatchFromParent() => true;
+    public TimeManager TimeManager {  get; private set; }
     public GameObject Player { get; private set; }
     public CoinManager CoinManager { get; private set; }
 
     public SaveData SaveData { get; private set; }
 
     public WinningTrigger WinningTrigger { get; private set; }
+
+    public override bool IsDestroyedOnLoad() => true;
+    public override bool ShouldDetatchFromParent() => true;
 
     public override void Awake()
     {
@@ -38,6 +40,7 @@ public class GameManager : AbstractSingleton<GameManager>
             Debug.Log("No save data found, starting fresh.");
             SaveData = new SaveData();
             SaveSystem.Save(SaveData);
+            SaveSystem.Load();
         }
 
         WinningTrigger = FindObjectOfType<WinningTrigger>();
@@ -46,5 +49,4 @@ public class GameManager : AbstractSingleton<GameManager>
             Debug.LogError("WinningTrigger not found in the scene.");
         }
     }
-
 }

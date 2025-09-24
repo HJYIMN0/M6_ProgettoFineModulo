@@ -51,8 +51,10 @@ public class PlayerController : MonoBehaviour
         _isMoving = _playerInput.Movement != Vector3.zero;
         _isRunning = _playerInput.IsRunning();
 
+        Vector3 input = _playerInput.Movement;
+
         // Movimento relativo alla camera
-        if (_playerInput.Movement != Vector3.zero)
+        if (input != Vector3.zero)
         {
             Vector3 camForward = _cameraTransform.forward;
             Vector3 camRight = _cameraTransform.right;
@@ -66,6 +68,8 @@ public class PlayerController : MonoBehaviour
             direction = (_playerInput.Movement.x * camRight +
                          _playerInput.Movement.z * camForward).normalized;
 
+            float inputMagnitude = Mathf.Clamp01(input.magnitude);
+
             // Rotazione fluida
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.fixedDeltaTime);
@@ -74,7 +78,7 @@ public class PlayerController : MonoBehaviour
             float finalSpeed = _baseSpeed;
             if (_playerInput.IsRunning()) finalSpeed *= _speedMultiplier;
 
-            Vector3 finalVelocity = direction * finalSpeed;
+            Vector3 finalVelocity = direction * finalSpeed * inputMagnitude;
             finalVelocity.y = _rb.velocity.y; // conserva velocità verticale
 
             _rb.velocity = finalVelocity;

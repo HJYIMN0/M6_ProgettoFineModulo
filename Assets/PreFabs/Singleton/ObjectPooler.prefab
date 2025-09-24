@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: Bullet
+  - tag: EnemyBullet
     prefab:
     - {fileID: 5107102793684358593, guid: 198b07ba1a3078846bbba6eb52cc138a, type: 3}
     size: 10

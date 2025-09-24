@@ -1,13 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using System.Threading;
-using Unity.VisualScripting;
 using System.Timers;
-using UnityEngine.SceneManagement;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class WinningUI : MonoBehaviour
 {    
@@ -16,9 +17,9 @@ public class WinningUI : MonoBehaviour
     private CanvasGroup _canvasGroup;
     private CanvasGroupFader _canvasGroupFader;
     private Timer _timer;
-    private TimeManager TimeInstance;    
+    private TimeManager TimeInstance;
 
-    public UnityEvent _OnWinLevel;
+    public Action OnWinLevel;
 
     private void Awake()
     {
@@ -49,12 +50,16 @@ public class WinningUI : MonoBehaviour
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
         _canvasGroupFader.SetVisibilityState(false);
+
+        gameObject.SetActive(false);
     }
 
     public void OnUICalled()
     {
+        gameObject.SetActive(true);
+
         _canvasGroupFader.CallFadeIn(_canvasGroupFader.FadeTimer);
-        _OnWinLevel?.Invoke();
+        OnWinLevel?.Invoke();
         _timerText.text = (_timer.CurrentTime - _timer.MaxTime ).ToString();
         SaveSystem.Save(new SaveData());
     }

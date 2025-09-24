@@ -24,7 +24,7 @@ public class PlayerInput : MonoBehaviour
 
         if (h != 0 || v != 0)
         {
-            _movement = new Vector3(h, 0, v).normalized;
+            _movement = new Vector3(h, 0, v);
         }
         else
         {

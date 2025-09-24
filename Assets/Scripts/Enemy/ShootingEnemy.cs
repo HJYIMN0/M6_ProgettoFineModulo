@@ -5,8 +5,10 @@ public class ShootingEnemy : AbstractEnemy
     private float _shootTimer = 0f;
     [SerializeField] private Transform _spawnLocation;
     [SerializeField] private float _shootInterval = 1f;
-    [SerializeField] private string _bulletPoolTag = "EnemyBullet";
+    [SerializeField] private SO_BulletData _bulletData;
 
+    private string _bulletPoolTag;
+    
     private ObjectPooler _pooler;
 
     private void Start()
@@ -14,12 +16,20 @@ public class ShootingEnemy : AbstractEnemy
         _pooler = ObjectPooler.Instance;
         if (_pooler == null)
             Debug.LogWarning($"{gameObject.name}has no reference to PoolInstance!");
+
+        if (_bulletData == null)
+        {
+            Debug.LogWarning("Missing the Bullet Scriptable Object reference!");
+            return;
+        }
+        _bulletPoolTag = _bulletData.PoolTag;
     }
 
 
     private void Update()
     {
         TryShoot();
+        Rotate();
     }
 
     public void TryShoot()
@@ -64,6 +74,21 @@ public class ShootingEnemy : AbstractEnemy
         else
         {
             Debug.Log("No player detected within range. Not shooting.");
+        }
+    }
+
+    public void Rotate()
+    {
+        if (IsPlayerInRange(out GameObject player))
+        {
+            Vector3 direction = player.transform.position - transform.position;
+            direction.y = 0f; // blocca l'asse verticale
+
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemyData.RotationSpeed * Time.deltaTime);
+            }
         }
     }
 }

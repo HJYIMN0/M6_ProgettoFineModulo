@@ -68,7 +68,7 @@ public class PauseMenu_Ui : MonoBehaviour
     {
         // Assicurati di ripristinare il timeScale prima di cambiare scena
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void RestartScene()
