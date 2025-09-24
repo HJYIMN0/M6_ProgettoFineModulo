@@ -10,11 +10,13 @@ public class PlayerJumpController : MonoBehaviour
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _maxJumpForce = 20f;
     [SerializeField] private float _secondJumpForce = 15f;
-    [SerializeField] private float _maxChargeTime = 2f; // Tempo massimo per caricare il salto
+    [SerializeField] private float _minJumpForce = 5f;
+
 
     [Header ("Time Settings")]
+    [SerializeField] private float _maxChargeTime = 2f; // Tempo massimo per caricare il salto
     [SerializeField] private float _timeWhileCharging = 0.3f;
-
+    [SerializeField] private float _minJumpTime = 0.5f;
 
     private TimeManager timeManager;
     private PlayerInput playerInput;
@@ -22,6 +24,7 @@ public class PlayerJumpController : MonoBehaviour
     private Rigidbody _rb;
 
     // Jump state
+    private bool _hasSlowedTime = false;
     private bool _isChargingJump = false;
     private float _chargeTime = 0f;
     private float _currentJumpForce = 0f;
@@ -95,51 +98,54 @@ public class PlayerJumpController : MonoBehaviour
 
     private void StartChargeJump()
     {
-
         OnMaxJumpCharge?.Invoke();
         _isChargingJump = true;
         _chargeTime = 0f;
         _currentJumpForce = _jumpForce;
+        _hasSlowedTime = false;
 
-        // Salva la velocità originale e rallenta il tempo
         _originalVelocity = _rb.velocity;
-
-        timeManager.CallTransitionTimeScale(timeManager.TimeScale, _timeWhileCharging, _maxChargeTime);
-
-        // Disabilita il movimento del player controller durante la carica
         playerController.SetMovementEnabled(false);
 
         Debug.Log("Started charging jump");
     }
 
+
     private void ChargeJump()
-    {        
+    {
         _chargeTime += Time.unscaledDeltaTime;
+
+        //Se premuto abbastanza a lungo, comincia a caricarlo
+        if (!_hasSlowedTime && _chargeTime >= _minJumpTime)
+        {
+            timeManager.CallTransitionTimeScale(timeManager.TimeScale, _timeWhileCharging, _maxChargeTime);
+            _hasSlowedTime = true;
+        }
 
         float chargeProgress = Mathf.Clamp01(_chargeTime / _maxChargeTime);
         _currentJumpForce = Mathf.Lerp(_jumpForce, _maxJumpForce, chargeProgress);
 
-        // Rallenta progressivamente il player mantenendo la direzione
         Vector3 horizontalVelocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
-        Vector3 deceleratedVelocity = Vector3.MoveTowards
-            (horizontalVelocity, Vector3.zero, playerController._speedDeceleration * Time.fixedDeltaTime);
+        Vector3 deceleratedVelocity = Vector3.MoveTowards(horizontalVelocity, Vector3.zero, playerController._speedDeceleration * Time.fixedDeltaTime);
         _rb.velocity = new Vector3(deceleratedVelocity.x, _rb.velocity.y, deceleratedVelocity.z);
     }
-  
+
+
 
 
     private void ExecuteJump()
     {
         if (!_isChargingJump) return;
-            
-        // Esegui il salto con la forza calcolata
-        _rb.velocity = new Vector3(_rb.velocity.x, _currentJumpForce, _rb.velocity.z);
 
-        // Reset dello stato
+        //I make sure that it uses _minJumpForce if not charged 
+        float jumpForceToUse = _chargeTime < _minJumpTime ? _minJumpForce : _currentJumpForce;
+        _rb.velocity = new Vector3(_rb.velocity.x, jumpForceToUse, _rb.velocity.z);
+
         FinishJumpCharge();
 
-        Debug.Log($"Jump executed with force: {_currentJumpForce:F1}");
+        Debug.Log($"Jump executed with force: {jumpForceToUse:F1}");
     }
+
 
     private void ExecuteSecondJump()
     {
@@ -165,11 +171,15 @@ public class PlayerJumpController : MonoBehaviour
         _chargeTime = 0f;
         _currentJumpForce = _jumpForce;
 
-        // Ripristina il tempo normale e riattiva il movimento
-        timeManager.SetTimeScaleToStandard();
-        timeManager.StopAllTransitions();
+        if (_hasSlowedTime)
+        {
+            timeManager.SetTimeScaleToStandard();
+            timeManager.StopAllTransitions();
+        }
+
         playerController.SetMovementEnabled(true);
     }
+
 
     public void SetSecondJump(bool value)
     {
