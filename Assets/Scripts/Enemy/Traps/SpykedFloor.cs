@@ -70,4 +70,9 @@ public class SpykedFloor : AbstractEnemy
         }
     }
 
+    public void TestMethod()
+    {
+        Debug.Log("Funziona!");
+    }
+
 }
