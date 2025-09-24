@@ -70,4 +70,11 @@ public class ObjectPooler : AbstractSingleton<ObjectPooler>
 
         return objectToSpawn;
     }
+
+    public void ReturnToPool(GameObject obj, string poolTag)
+    {
+        obj.SetActive(false);
+        // L'oggetto è già nella queue, quindi non serve fare altro
+        Debug.Log($"Object returned to pool: {poolTag}");
+    }
 }
