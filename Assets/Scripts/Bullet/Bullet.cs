@@ -83,6 +83,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Nome oggetto colpito: {other.gameObject.name}");
         if (other.CompareTag("Player"))
         {
             LifeController lc = other.GetComponentInParent<LifeController>();

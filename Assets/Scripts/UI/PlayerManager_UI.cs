@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using System;
 
 
 public class PlayerManager_UI : MonoBehaviour
@@ -12,10 +13,12 @@ public class PlayerManager_UI : MonoBehaviour
     [SerializeField] private Image[] _hp;
     [SerializeField] private Image _hasDoubleJump;
     [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private int _maxScore = 10;
 
-    public UnityEvent _onAllCoinsCollected;
+    public Action _onAllCoinsCollected;
+
+    private int _maxScore;    
     private CanvasGroup _canvasGroup;
+    private GameManager _gameManager;
 
     private void Awake()
     {
@@ -24,6 +27,7 @@ public class PlayerManager_UI : MonoBehaviour
 
     private void Start()
     {
+        _gameManager = GameManager.Instance;
         foreach (Image image in _hp)
             image.color = Color.green;
 

@@ -82,11 +82,12 @@ public class ShootingEnemy : AbstractEnemy
         if (IsPlayerInRange(out GameObject player))
         {
             Vector3 direction = player.transform.position - transform.position;
-            direction.y = 0f; // blocca l'asse verticale
+            direction.y = 0f; // ignora la differenza di altezza
 
             if (direction != Vector3.zero)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                float angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                Quaternion targetRotation = Quaternion.Euler(0f, angleY, 0f);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemyData.RotationSpeed * Time.deltaTime);
             }
         }

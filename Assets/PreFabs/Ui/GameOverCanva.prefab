@@ -121,8 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOver_UI, Assembly-CSharp
+      - m_Target: {fileID: 2627995282989897891}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -407,9 +407,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOver_UI, Assembly-CSharp
-        m_MethodName: RestartScene
+      - m_Target: {fileID: 2627995282989897891}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: Retry
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -434,6 +434,7 @@ GameObject:
   - component: {fileID: 641659974561497074}
   - component: {fileID: 3321679450524053960}
   - component: {fileID: 5210984837450631967}
+  - component: {fileID: 2627995282989897891}
   m_Layer: 5
   m_Name: GameOverCanva
   m_TagString: Untagged
@@ -565,6 +566,19 @@ MonoBehaviour:
   canvasGroup: {fileID: 641659974561497074}
   invisibleAlpha: 0
   visibleAlpha: 1
+--- !u!114 &2627995282989897891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7379030604472610249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad143f164bc8c445afc7f8d8593ac10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuName: MainMenu
 --- !u!1 &7789008075705816238
 GameObject:
   m_ObjectHideFlags: 0
