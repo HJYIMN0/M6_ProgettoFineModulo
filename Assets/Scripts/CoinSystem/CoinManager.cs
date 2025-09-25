@@ -23,15 +23,18 @@ public class CoinManager : MonoBehaviour
 
         //set total coins at start
         totalCoins = coinObjects.Length;
+        if (totalCoins <= 0)
+        {
+            Debug.LogError("Put at least one coin in scene!");
+            return;
+        }
+
         Debug.Log("Total Coins in Scene: " + totalCoins);
 
         if (winningTrigger == null)
         {
             Debug.LogError($"{gameObject.name} can't find WinningTrigger in the scene.");
         }
-
-        // RIMUOVI QUESTA RIGA che resetta sempre a 0
-        // collectedCoins = 0;
 
         if (saveData != null)
         {

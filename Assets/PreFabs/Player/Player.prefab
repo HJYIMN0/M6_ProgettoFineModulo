@@ -138,8 +138,10 @@ MonoBehaviour:
   _jumpForce: 5
   _maxJumpForce: 20
   _secondJumpForce: 15
+  _minJumpForce: 5
   _maxChargeTime: 2
   _timeWhileCharging: 0.3
+  _minJumpTime: 0.5
   _onSecondJump:
     m_PersistentCalls:
       m_Calls: []
@@ -155,24 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8644fd61b07f0d459a7d2c417a1eee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 5
-  _maxHp: 5
-  _maxHpOnStart: 1
-  OnLifeChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerManager_UI, Assembly-CSharp
-        m_MethodName: TurnOffHp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _hp: 3
+  _maxHp: 3
+  _maxHpOnStart: 0
 --- !u!114 &152529853661212288
 MonoBehaviour:
   m_ObjectHideFlags: 0

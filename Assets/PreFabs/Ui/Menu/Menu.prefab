@@ -389,9 +389,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu_UI, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 5063776681770561991}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: StartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 5506669984317152514}
   - component: {fileID: 7261211682302606333}
   - component: {fileID: 2491124448566421153}
+  - component: {fileID: 5063776681770561991}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -592,6 +593,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &5063776681770561991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277087452672705455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad143f164bc8c445afc7f8d8593ac10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuName: MainMenu
 --- !u!1 &4363034081090868410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,9 +1702,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu_UI, Assembly-CSharp
-        m_MethodName: Quit
+      - m_Target: {fileID: 5063776681770561991}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: MenuQuit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

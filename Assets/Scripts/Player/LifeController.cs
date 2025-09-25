@@ -12,15 +12,24 @@ public class LifeController : MonoBehaviour
     [SerializeField] private int _maxHp = 5;
     [SerializeField] private bool _maxHpOnStart = true;
 
-    public UnityEvent<int, int> OnLifeChanged; //hp, max hp
+    public Action<int, int> OnLifeChanged; //hp, max hp
     public Action _onDeath;
 
     public int GetHp() => _hp;
     public int GetMaxHp() => _maxHp;
     public void SetHp(int hp)
     {
-        _hp = Mathf.Clamp(hp, 0, _maxHp);
+        if (_hp != hp)
+        {
+            _hp = Mathf.Clamp(hp, 0, _maxHp);
+            OnLifeChanged?.Invoke(_hp, _maxHp);
+        }
+        if (_hp <= 0)
+        {
+            Die(gameObject);        
+        }
     }
+
 
     public void SetMaxHp(int maxHp)
     {
@@ -44,16 +53,11 @@ public class LifeController : MonoBehaviour
     {
         SetHp(_hp - damage);
         Debug.Log($"Damage taken: {damage}. Current HP: {_hp}/{_maxHp}");
-        OnLifeChanged?.Invoke(_hp, _maxHp);
-        if (_hp <= 0)
-        {
-            Die(gameObject);
-        }
     }
 
     public void Heal(int amount)
     {
-        SetHp(_hp + amount);
+        SetHp(Mathf.Min(_hp + amount, _maxHp));
     }
 
     public void Die(GameObject target)
@@ -77,5 +81,18 @@ public class LifeController : MonoBehaviour
             }
         }
     }
+
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.L)) 
+    //    {            
+    //        if (_hp >= 2) 
+    //        {
+    //            TakeDamage(1);
+    //            return;
+    //        }
+    //        SetHp(_maxHp);
+    //    }
+    //}
 
 }

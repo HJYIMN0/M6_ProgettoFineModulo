@@ -6,102 +6,52 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using System;
+using Unity.VisualScripting;
 
 
 public class PlayerManager_UI : MonoBehaviour
 {
-    [SerializeField] private Image[] _hp;
-    [SerializeField] private Image _hasDoubleJump;
-    [SerializeField] private TextMeshProUGUI _scoreText;
+    [Header("UI References")]
+    [SerializeField] private Image[] _healthImages;
 
-    public Action _onAllCoinsCollected;
+    [Header("Sprites")]
+    [SerializeField] private Sprite _hpSpriteOn;
+    [SerializeField] private Sprite _hpSpriteOff;
 
-    private int _maxScore;    
-    private CanvasGroup _canvasGroup;
     private GameManager _gameManager;
-
-    private void Awake()
-    {
-        _canvasGroup = GetComponent<CanvasGroup>();
-    }
+    
 
     private void Start()
     {
         _gameManager = GameManager.Instance;
-        foreach (Image image in _hp)
-            image.color = Color.green;
 
-        _scoreText.text = $" 0/{_maxScore}";
+        _gameManager.Player.GetComponentInParent<LifeController>().OnLifeChanged += OnLifeChanged;
     }
 
-
-    public void TurnOffHp()
+    public void OnLifeChanged(int currentHp, int maxHp)
     {
-        foreach (Image hp in _hp)
+        if (_healthImages == null || _hpSpriteOn == null || _hpSpriteOff == null) return;
+
+        int count = Mathf.Min(_healthImages.Length, maxHp);
+
+        for (int i = 0; i < count; i++)
         {
-            if (hp != null)
-            {
-                if (hp.color != Color.red)
-                {
-                    hp.color = Color.red;
-                    return;
-                }
-            }
+            if (_healthImages[i] == null) continue;
+
+            _healthImages[i].sprite = i < currentHp ? _hpSpriteOn : _hpSpriteOff;
         }
     }
 
-    public void UiDoubleJump(bool hasDoubleJump)
-    {        
-        if (_hasDoubleJump == null) return;
-        if (hasDoubleJump)
-        {
-            _hasDoubleJump.color = new Color(0, 1, 0, 1);
-        }
-        else
-        {
-            _hasDoubleJump.color = new Color(0, 1, 0, 0);
-            
-        }
-
-    }
-
-    public void CollectedCoins(int score)
+    public void TestMethod()
     {
-        _scoreText.text = $"{score} / {_maxScore}";
-        if (score >= _maxScore)
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            Debug.Log("Preso tutte le monete!");
-            score = _maxScore;
-            _onAllCoinsCollected?.Invoke();            
-        }
-
-    }
-
-    public void CallFadeOut()
-    {
-        StartCoroutine(FadeOut());
-        _canvasGroup.interactable = false;
-    }
-    private IEnumerator FadeOut()
-    {
-        if (_canvasGroup != null)
-        {
-            while (_canvasGroup.alpha > 0f)
-            {
-                _canvasGroup.alpha -= Time.deltaTime;
-                yield return null;
-            }
-        }
-        else
-        {
-            Debug.Log("Manca il CanvasGroup da qualche parte!");
+            Debug.Log($"{_gameManager.Player.gameObject.name}");
+            _gameManager.Player.GetComponentInParent<LifeController>().TakeDamage(1);
+            int a = _gameManager.Player.GetComponentInParent<LifeController>().GetHp();
+            int b = _gameManager.Player.GetComponentInParent<LifeController>().GetMaxHp();
+            OnLifeChanged(a , b);
+            Debug.Log("Doing it!");
         }
     }
-
-    //private void Update()
-    //{
-    //    TurnOffHp();
-    //}
-
-
 }

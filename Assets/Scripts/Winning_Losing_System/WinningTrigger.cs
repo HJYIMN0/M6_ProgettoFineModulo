@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinningTrigger : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class WinningTrigger : MonoBehaviour
     private bool _hasCollectedAllCoins = false;
 
     public void Awake()
-    {        
+    {
         if (_winningUI == null)
         {
             _winningUI = GetComponent<WinningUI>();
@@ -24,9 +23,19 @@ public class WinningTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //aggiungere la logica delle monete raccolte necessarie 
-            //if (playerCoins >= requiredCoins)...
+            if (!_hasCollectedAllCoins)
+            {
+                Debug.Log("Non hai raccolto tutte le monete!");
+                return;
+            }
+
+
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            LevelManager.Instance.OnLevelCompleted(currentSceneName);
+
             _winningUI.OnUICalled();
+
+            Debug.Log($"Livello '{currentSceneName}' completato e salvato.");
         }
     }
 
