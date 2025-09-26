@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class SaveSystem
 {
@@ -9,64 +8,45 @@ public class SaveSystem
 
     public static bool Save(SaveData data)
     {
-        try
-        {
-            string path = GetPath();
-            string json = JsonUtility.ToJson(data, true);
-            File.WriteAllText(path, json);
-            Debug.Log($"Saved to {path}");
-            return true;
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"Failed to save: {e.Message}");
-            return false;
-        }
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(GetPath(), json);
+        Debug.Log($"Saved {json} to {GetPath()}");
+        return true;
     }
 
-    public static bool DoesSaveExist()
-    {
-        return File.Exists(GetPath());
-    }
+    public static bool DoesSaveExist() => File.Exists(GetPath());
 
     public static SaveData Load()
     {
-        string path = GetPath();
-        if (!DoesSaveExist())
-        {
-            Debug.LogWarning($"Save file not found in {path}");
-            return null;
-        }
+        if (!DoesSaveExist()) return null;
 
-        try
-        {
-            string jsonString = File.ReadAllText(path);
-            SaveData data = JsonUtility.FromJson<SaveData>(jsonString);
-            Debug.Log($"Loaded from {path}");
-            return data;
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"Failed to load save: {e.Message}");
-            return null;
-        }
+        string json = File.ReadAllText(GetPath());
+        SaveData data = JsonUtility.FromJson<SaveData>(json);
+        Debug.Log($"Loaded {json} from {GetPath()}");
+        return data;
     }
 
-    public static bool SaveFinishedLevel(string levelID)
+    public static SaveData LoadOrInitialize()
     {
-        SaveData data = Load() ?? new SaveData();
-        data.UpdateCompletedLevels(levelID);
+        SaveData data = Load();
 
-        int completedCount = data.GetCompletedLevelsCount();
-        Debug.Log($"Level {levelID} completed. Total completed levels: {completedCount}");
+        if (data == null)
+        {
+            data = new SaveData();
+            data.levelsProgress = new List<SaveData.LevelData>();
 
-        return Save(data);
-    }
+            var sceneIDs = LevelManager.Instance.Scenes;
+            for (int i = 0; i < sceneIDs.Length; i++)
+            {
+                var level = new SaveData.LevelData(sceneIDs[i], i);
+                level.isUnlocked = (i == 0); // Solo il primo sbloccato
+                data.levelsProgress.Add(level);
+            }
 
-    // Nuovo metodo per ottenere il prossimo livello da caricare
-    public static string GetNextLevelToLoad(LevelConfiguration config)
-    {
-        SaveData data = Load() ?? new SaveData();
-        return data.GetNextLevelToLoad(config);
+            Save(data);
+            Debug.Log("SaveData inizializzato da LevelManager.");
+        }
+
+        return data;
     }
 }

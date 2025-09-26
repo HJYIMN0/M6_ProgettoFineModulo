@@ -39,7 +39,7 @@ public class CoinManager : MonoBehaviour
         if (saveData != null)
         {
             // Carica i coins raccolti dai dati salvati
-            collectedCoins = saveData.collectedCoins;
+            collectedCoins = saveData.totalCollectedCoins;
         }
         else
         {
@@ -62,9 +62,8 @@ public class CoinManager : MonoBehaviour
             winningTrigger.SetHasCollectedAllCoins(true);
             // Trigger any event or action for collecting all coins
             collectedCoins = 0; // Reset collected coins for potential replay
-            saveData.totalCoinsCollected += totalCoins;
+            saveData.totalCollectedCoins += collectedCoins;
         }
-        saveData.collectedCoins = collectedCoins;
         SaveSystem.Save(saveData);
     }
 }

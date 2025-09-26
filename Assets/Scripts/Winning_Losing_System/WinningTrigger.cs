@@ -31,7 +31,7 @@ public class WinningTrigger : MonoBehaviour
 
 
             string currentSceneName = SceneManager.GetActiveScene().name;
-            LevelManager.Instance.OnLevelCompleted(currentSceneName);
+            LevelManager.Instance.SaveCompletedLevel(currentSceneName);
 
             _winningUI.OnUICalled();
 
