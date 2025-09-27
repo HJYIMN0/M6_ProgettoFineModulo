@@ -25,6 +25,9 @@ public class Coin : MonoBehaviour
 
     private void Start()
     {
+        gameObject.SetActive(true);
+        _isCollected = false;
+
         if (GameManager == null)
         {
             Debug.LogError($"{this.gameObject.name} could not find the GameManager!");

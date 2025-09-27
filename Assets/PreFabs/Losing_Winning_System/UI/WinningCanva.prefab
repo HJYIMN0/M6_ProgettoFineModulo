@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477de07063e34fe4dbbd33f9635851cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timerText: {fileID: 0}
+  _timerText: {fileID: 2910241040210785366}
 --- !u!225 &2841251906095831802
 CanvasGroup:
   m_ObjectHideFlags: 0

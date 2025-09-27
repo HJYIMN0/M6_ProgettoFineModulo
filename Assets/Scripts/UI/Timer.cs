@@ -35,11 +35,14 @@ public class Timer : MonoBehaviour
             Debug.LogError("TimeManager instance not found in the scene.");
             return;
         }
+        _timer = _maxTime;
         if (!TimeInstance.IsRunning)
         {
             TimeInstance.SetTimeScaleToStandard();
             StartTimer();
+            return;
         }
+        StartTimer();
     }
 
     private void Update()
@@ -63,11 +66,14 @@ public class Timer : MonoBehaviour
             StopTimer();
             OnTimerEnd?.Invoke();
         }
+
+        //Debug.Log($"timer = {_timer} maxTimer = {_maxTime}");
     }
 
     public void StartTimer()
     {
         _timer = _maxTime;
+        _lastSecond = -1;
         _lastSecond = Mathf.CeilToInt(_timer);
         _currentTime = _lastSecond;
         _isRunning = true;

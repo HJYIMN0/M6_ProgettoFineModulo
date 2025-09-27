@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7564137880112539069
+--- !u!1 &3710374688449871988
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8191577823010279006}
-  - component: {fileID: 3718883597176273390}
+  - component: {fileID: 9117670121233326202}
+  - component: {fileID: 1660246370371098918}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: CoinManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8191577823010279006
+--- !u!4 &9117670121233326202
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7564137880112539069}
+  m_GameObject: {fileID: 3710374688449871988}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.28782, y: 6.010205, z: 8.515353}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3718883597176273390
+--- !u!114 &1660246370371098918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7564137880112539069}
+  m_GameObject: {fileID: 3710374688449871988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eb9d1a3b464bd144b1a69a062543c68, type: 3}
+  m_Script: {fileID: 11500000, guid: 6dc811cf93c119e4b8d9d8f4e2e9a06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenes:
-  - lvl00
-  - lvl01

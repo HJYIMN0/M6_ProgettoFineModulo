@@ -25,6 +25,7 @@ public class PlayerManager_UI : MonoBehaviour
     {
         _gameManager = GameManager.Instance;
 
+        _gameManager.Player.gameObject.SetActive(true);
         _gameManager.Player.GetComponentInParent<LifeController>().OnLifeChanged += OnLifeChanged;
     }
 

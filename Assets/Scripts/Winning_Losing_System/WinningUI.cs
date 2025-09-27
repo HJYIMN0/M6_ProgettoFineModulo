@@ -60,7 +60,7 @@ public class WinningUI : MonoBehaviour
 
         _canvasGroupFader.CallFadeIn(_canvasGroupFader.FadeTimer);
         OnWinLevel?.Invoke();
-        _timerText.text = (_timer.CurrentTime - _timer.MaxTime ).ToString();
+        _timerText.text = ( _timer.MaxTime - _timer.CurrentTime ).ToString();
         SaveSystem.Save(new SaveData());
     }
     public void GoToNextLevel() => Debug.Log("I'm sorry, this is the only level available at the moment!");

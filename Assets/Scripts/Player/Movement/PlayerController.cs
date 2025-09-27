@@ -37,6 +37,11 @@ public class PlayerController : MonoBehaviour
         if (_playerInput == null) Debug.LogError($"{this.gameObject.name} missing PlayerInput component!");
     }
 
+    private void Start()
+    {
+        _movementEnabled = true;
+    }
+
     private void FixedUpdate()
     {
         if (_movementEnabled)

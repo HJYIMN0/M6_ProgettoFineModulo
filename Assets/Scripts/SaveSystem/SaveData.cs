@@ -8,14 +8,17 @@ public class SaveData
     public List<float> highScores;
     public int playerCoins;
     public int totalCollectedCoins;
-
     public float masterVolume = 1f;
     public float musicVolume = 1f;
     public float sfxVolume = 1f;
-
     public int hp = 5;
     public int maxHp = 5;
     public string currentScene = "";
+
+    // Posizioni salvate come float separati
+    public float playerPosX = 0f;
+    public float playerPosY = 0f;
+    public float playerPosZ = 0f;
 
     [System.Serializable]
     public class LevelData

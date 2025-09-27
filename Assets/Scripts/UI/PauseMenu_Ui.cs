@@ -31,6 +31,8 @@ public class PauseMenu_Ui : MonoBehaviour
     {        
         _canvasGroup.interactable = false;
         _canvasGroup.alpha = 0f;
+        _canvasGroup.blocksRaycasts = false;
+        //gameObject.SetActive(false);
         _isPaused = false;        
     }   
 
@@ -38,6 +40,7 @@ public class PauseMenu_Ui : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            //gameObject.SetActive(true);
             CallPauseMenu();
         }
     }
@@ -53,7 +56,9 @@ public class PauseMenu_Ui : MonoBehaviour
         _isPaused = true;
         _canvasGroup.alpha = 1f;
         _canvasGroup.interactable = true;
+        _canvasGroup.blocksRaycasts = true;
         _timerInstance.PauseGame();
+        //gameObject.SetActive(_isPaused);
     }
 
     public void Resume()
@@ -61,7 +66,9 @@ public class PauseMenu_Ui : MonoBehaviour
         _isPaused = false;
         _canvasGroup.alpha = 0f;
         _canvasGroup.interactable = false;
+        _canvasGroup.blocksRaycasts = false;
         _timerInstance.ResumeGame();
+        //gameObject.SetActive(_isPaused);
     }
 
     public void Quit()
@@ -69,6 +76,7 @@ public class PauseMenu_Ui : MonoBehaviour
         // Assicurati di ripristinare il timeScale prima di cambiare scena
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+        //gameObject.SetActive(_isPaused);
     }
 
     public void RestartScene()

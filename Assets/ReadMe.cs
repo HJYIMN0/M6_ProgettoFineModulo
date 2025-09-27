@@ -47,7 +47,7 @@
 //hai trasformato questa variabile in una property ed è per questo che Unity non la serializza
 //e quindi non hai potuto assegnare il prefab da spawnare
 
-//attenzione a non normalizzare l'input del player se ha magnitudo < 1 perché altrimenti parte subito veloce e
+//attenzione a non normalizzare l'input del _player se ha magnitudo < 1 perché altrimenti parte subito veloce e
 //quando si ferma si ferma in ritardo (senza rallentare)
 
 //non dovresti tenere i canvas sempre tutti attivi

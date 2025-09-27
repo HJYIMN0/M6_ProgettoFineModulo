@@ -33,7 +33,7 @@ public class WinningTrigger : MonoBehaviour
             string currentSceneName = SceneManager.GetActiveScene().name;
             LevelManager.Instance.SaveCompletedLevel(currentSceneName);
 
-            _winningUI.OnUICalled();
+            _winningUI?.OnUICalled();
 
             Debug.Log($"Livello '{currentSceneName}' completato e salvato.");
         }
