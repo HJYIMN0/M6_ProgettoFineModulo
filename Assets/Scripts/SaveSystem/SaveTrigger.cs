@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class SaveTrigger : MonoBehaviour
 {
+    [Header("Timer settings")]
+    [SerializeField] private float _timerIncreaseValue = 20f;
+
+    [Header("Scale Settings")]
     [SerializeField] private float _amplitude;
     [SerializeField] private float _speed;
+
+    [Header("References")]
     [SerializeField] private GameObject _graphics;
     [SerializeField] private Transform newPos; // Posizione da salvare
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,10 +26,9 @@ public class SaveTrigger : MonoBehaviour
 
             if (lifeController != null)
             {
-                // Ripristina HP
+                
                 lifeController.SetHp(lifeController.GetMaxHp());
-
-                // Trova il PlayerSpawn component e aggiorna la spawn position
+                //Non riuscivo a controllare da qui la posizione, ho creato una nuova classe
                 SpawnPositionHandler playerSpawn = other.GetComponentInParent<SpawnPositionHandler>();
 
                 if (playerSpawn != null)
@@ -35,7 +41,6 @@ public class SaveTrigger : MonoBehaviour
                     Debug.LogError("PlayerSpawn component not found on player!");
                 }
 
-                // Se vuoi ancora salvare le monete o altro nel SaveSystem, puoi farlo qui
                 CoinManager coinCollector = GameManager.Instance.CoinManager;
                 if (coinCollector != null)
                 {
@@ -50,6 +55,8 @@ public class SaveTrigger : MonoBehaviour
             {
                 Debug.LogWarning("Can't find LifeController on " + other.gameObject.name);
             }
+
+            GameManager.Instance.Timer.IncreaseTimerByValue(_timerIncreaseValue);
         }
     }
 

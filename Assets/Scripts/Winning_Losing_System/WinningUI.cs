@@ -13,6 +13,7 @@ using UnityEngine.UI;
 public class WinningUI : MonoBehaviour
 {    
     [SerializeField] private TextMeshProUGUI _timerText;
+    [SerializeField] private string _firstlvlName = "lvl00";
 
     private CanvasGroup _canvasGroup;
     private CanvasGroupFader _canvasGroupFader;
@@ -63,7 +64,21 @@ public class WinningUI : MonoBehaviour
         _timerText.text = ( _timer.MaxTime - _timer.CurrentTime ).ToString();
         SaveSystem.Save(new SaveData());
     }
-    public void GoToNextLevel() => Debug.Log("I'm sorry, this is the only level available at the moment!");
+    public void GoToNextLevel() 
+    {
+        //Mi dispiace, ho provato a lungo a caricare i livelli superati e no,
+        //Ma non ne sono stato in grado.
+        //Questa soluzione funziona, ma fa schifo ahah
+        if (SceneManager.GetActiveScene().name.Equals(_firstlvlName))
+        {
+            SceneManager.LoadScene("lvl01");
+            GameManager.Instance.TimeManager.GetComponent<Timer>().ResetTimer();
+        }
+        else
+        {
+            Debug.Log("I'm sorry, this is the last level available at the moment!");
+        }
+    }
     
     public void RetryLevel()
     {

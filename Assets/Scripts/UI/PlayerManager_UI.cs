@@ -38,7 +38,7 @@ public class PlayerManager_UI : MonoBehaviour
         _coinManager = _gameManager.CoinManager;
         _coinManager.OnCoinCollected += DisplayCoin;
 
-        DisplayCoin(_coinManager.CollectedCoins, _coinManager.totalCoins);
+        DisplayCoin(_coinManager.CollectedCoins, _coinManager.TotalCoins);
 
         _gameManager.Player.GetComponentInParent<PlayerJumpController>().OnSecondJump += ShowDoubleJumpUI;
         _jumpSprite.SetActive(false);
@@ -61,7 +61,7 @@ public class PlayerManager_UI : MonoBehaviour
     {
         if (_gameManager.WinningTrigger.CollectedAllCoins)
         {
-            _coinText.text = $"{_coinManager.totalCoins} / {_coinManager.totalCoins}";
+            _coinText.text = $"{_coinManager.TotalCoins} / {_coinManager.TotalCoins}";
             return;
         }
         _coinText.text = $"{collectedcoins} / {totalCoins}";

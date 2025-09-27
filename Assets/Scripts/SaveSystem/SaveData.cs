@@ -8,6 +8,7 @@ public class SaveData
     public List<float> highScores;
     public int playerCoins;
     public int totalCollectedCoins;
+    public int collectedCoins;
     public float masterVolume = 1f;
     public float musicVolume = 1f;
     public float sfxVolume = 1f;

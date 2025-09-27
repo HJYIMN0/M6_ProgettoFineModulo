@@ -7,8 +7,7 @@ public class LevelManager : AbstractSingleton<LevelManager>
     [Header("Lista delle scene di gioco")]
     [SerializeField] private string[] scenes;
     
-    [Header("Player GameObject")]
-    [SerializeField] private GameObject player;
+    private GameObject player;
 
     public string[] Scenes => scenes;
     public override bool IsDestroyedOnLoad() => false;
@@ -16,6 +15,9 @@ public class LevelManager : AbstractSingleton<LevelManager>
 
     private void Start()
     {
+
+        player = GameManager.Instance.Player;
+
         LoadPlayerPosition();
         InitializeLevelProgress();
     }

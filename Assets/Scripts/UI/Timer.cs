@@ -114,6 +114,11 @@ public class Timer : MonoBehaviour
         DisplayTimer();
     }
 
+    public void IncreaseTimerByValue(float value)
+    {
+        _timer = Mathf.Min(+_timer + value, _maxTime);
+    }
+
 
     public void SetMaxTime(int maxTime)
     {

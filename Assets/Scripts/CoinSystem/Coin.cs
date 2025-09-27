@@ -9,7 +9,8 @@ using UnityEngine.UIElements;
 public class Coin : MonoBehaviour
 {
     [SerializeField] private int value = 1;
-    [SerializeField] public Func<int, int> _onCoinCollected;
+    
+    public Func<int, int> _onCoinCollected;
     private bool _isCollected = false;
     //[SerializeField] private PlayerController _player;
     [SerializeField] private float _setActiveDelay = 2f;
@@ -64,8 +65,8 @@ public class Coin : MonoBehaviour
         Invoke("SetActiveTrue", _setActiveDelay);
     }
 
-    public void SetActiveTrue()
+    public void SetCoinCollected(bool value) 
     {
-        gameObject.SetActive(true);
+        _isCollected = value;
     }
 }

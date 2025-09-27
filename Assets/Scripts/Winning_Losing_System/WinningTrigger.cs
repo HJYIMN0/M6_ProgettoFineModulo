@@ -38,6 +38,8 @@ public class WinningTrigger : MonoBehaviour
             _winningUI?.OnUICalled();
 
             Debug.Log($"Livello '{currentSceneName}' completato e salvato.");
+
+            GameManager.Instance.Timer.StopTimer();
         }
     }
 

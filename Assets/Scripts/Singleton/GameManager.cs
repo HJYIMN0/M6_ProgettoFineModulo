@@ -8,6 +8,7 @@ public class GameManager : AbstractSingleton<GameManager>
     public GameObject Player { get; private set; }
     public CoinManager CoinManager { get; private set; }
 
+    public Timer Timer { get; private set; }
     public SaveData SaveData { get; private set; }
 
     public WinningTrigger WinningTrigger { get; private set; }
@@ -47,6 +48,12 @@ public class GameManager : AbstractSingleton<GameManager>
         if (WinningTrigger == null)
         {
             Debug.LogError("WinningTrigger not found in the scene.");
+        }
+
+        Timer = FindObjectOfType<Timer>();
+        if (Timer == null)
+        {
+            Debug.LogError("Timer not found in scene");
         }
     }
     public void Start()

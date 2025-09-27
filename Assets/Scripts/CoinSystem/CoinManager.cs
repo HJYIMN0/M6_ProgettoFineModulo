@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CoinManager : MonoBehaviour
 {
-    public int totalCoins { get; private set; }
+    public int TotalCoins { get; private set; }
     private static int collectedCoins;   
     
     public int CollectedCoins => collectedCoins;
@@ -24,15 +24,20 @@ public class CoinManager : MonoBehaviour
             return;
         }
 
+        foreach (GameObject coinObject in coinObjects) 
+        {
+            coinObject.GetComponent<Coin>().SetCoinCollected(false);
+        }
+
         //set total coins at start
-        totalCoins = coinObjects.Length;
-        if (totalCoins <= 0)
+        TotalCoins = coinObjects.Length;
+        if (TotalCoins <= 0)
         {
             Debug.LogError("Put at least one coin in scene!");
             return;
         }
 
-        Debug.Log("Total Coins in Scene: " + totalCoins);
+        Debug.Log("Total Coins in Scene: " + TotalCoins);
 
         if (winningTrigger == null)
         {
@@ -42,7 +47,7 @@ public class CoinManager : MonoBehaviour
         if (saveData != null)
         {
             // Carica i coins raccolti dai dati salvati
-            collectedCoins = saveData.totalCollectedCoins;
+            collectedCoins = saveData.collectedCoins;
         }
         else
         {
@@ -58,16 +63,16 @@ public class CoinManager : MonoBehaviour
     {
         collectedCoins += value;
         Debug.Log("Collected Coins: " + collectedCoins);
-        if (collectedCoins >= totalCoins)
+        if (collectedCoins >= TotalCoins)
         {
-            collectedCoins = totalCoins; // Ensure it doesn't exceed totalCoins
+            collectedCoins = TotalCoins; // Ensure it doesn't exceed TotalCoins
             Debug.Log("All coins collected!");
             winningTrigger.SetHasCollectedAllCoins(true);
             // Trigger any event or action for collecting all coins
             collectedCoins = 0; // Reset collected coins for potential replay
             saveData.totalCollectedCoins += collectedCoins;
         }
-        OnCoinCollected?.Invoke(collectedCoins, totalCoins);
+        OnCoinCollected?.Invoke(collectedCoins, TotalCoins);
         SaveSystem.Save(saveData);
     }
 }

@@ -63,7 +63,9 @@ public class ShootingEnemy : AbstractEnemy
                         return;
                     }
                     bullet.SetOwner(this);
-                    Vector3 direction = (player.transform.position - transform.position).normalized;
+                    Vector3 dir = new Vector3(player.transform.position.x, player.transform.position.y + _bulletData.HeightDifference, player.transform.position.z);
+                    //Vector3 direction = (player.transform.position - transform.position).normalized;
+                    Vector3 direction = (dir - transform.position).normalized;
                     bulletRb.velocity = Vector3.zero;
                     bulletRb.angularVelocity = Vector3.zero;
                     bulletRb.AddForce(direction * bullet.BulletData.Speed, ForceMode.Impulse);
