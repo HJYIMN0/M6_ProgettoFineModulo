@@ -11,8 +11,8 @@ public class SaveData
     public float masterVolume = 1f;
     public float musicVolume = 1f;
     public float sfxVolume = 1f;
-    public int hp = 5;
-    public int maxHp = 5;
+    public int hp = 3;
+    public int maxHp = 3;
     public string currentScene = "";
 
     // Posizioni salvate come float separati

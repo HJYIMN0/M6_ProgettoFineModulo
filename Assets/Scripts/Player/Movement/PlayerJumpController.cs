@@ -32,7 +32,7 @@ public class PlayerJumpController : MonoBehaviour
 
     // Second jump
     public bool _hasSecondJump { get; set; } = false;
-    public UnityEvent<bool> _onSecondJump;
+    public Action<bool> OnSecondJump;
     public Action OnMaxJumpCharge;
 
     private void Awake()
@@ -153,6 +153,7 @@ public class PlayerJumpController : MonoBehaviour
 
         _rb.velocity = new Vector3(_rb.velocity.x, _secondJumpForce, _rb.velocity.z);
         SetSecondJump(false);
+        OnSecondJump?.Invoke(false);
 
         Debug.Log("Second jump executed");
     }
@@ -186,8 +187,8 @@ public class PlayerJumpController : MonoBehaviour
         if (_hasSecondJump == value) return;
 
         _hasSecondJump = value;
-        _onSecondJump?.Invoke(value);
-
+        OnSecondJump?.Invoke(value);
+        
         if (value)
         {
             Debug.Log("Second jump enabled");

@@ -142,9 +142,6 @@ MonoBehaviour:
   _maxChargeTime: 2
   _timeWhileCharging: 0.3
   _minJumpTime: 0.5
-  _onSecondJump:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &6841373928038686593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5047,6 +5044,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6018948339261266365}
   - component: {fileID: 8689745909461691667}
+  - component: {fileID: 4965069475695422371}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -5100,6 +5098,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &4965069475695422371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3171925990607044661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736292c1816467e40be31e9356876476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPos: {x: 0, y: 0, z: 0}
 --- !u!1 &4232159051775091131
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,57 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoseTrigger : MonoBehaviour
 {
-    [SerializeField] private int _dmgOnFall;
-    private GameObject _player;
-    private bool _hasTakenDamage = false;
+    [SerializeField] private int _dmgOnFall = 1;
 
-    private void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        _player = GameManager.Instance.Player;
-    }
-
-    private void Update()
-    {
-        if (_player != null)
+        if (other.CompareTag("Player"))
         {
-            Vector3 playerPos = _player.transform.position;
-
-            if (playerPos.y < transform.position.y && !_hasTakenDamage)
-            {
-                // Il player è caduto e non ha ancora preso danno
-                LifeController playerLifeController = _player.GetComponentInParent<LifeController>();
-                if (playerLifeController != null)
-                {
-                    playerLifeController.TakeDamage(_dmgOnFall);
-                }
-
-                // Carica la posizione salvata usando il nuovo sistema
-                SaveData data = SaveSystem.Load();
-                if (data != null && (data.playerPosX != 0 || data.playerPosY != 0 || data.playerPosZ != 0))
-                {
-                    SaveSystem.SetGameObjectPosition(_player, data.playerPosX, data.playerPosY, data.playerPosZ);
-                    StartCoroutine(ResetDamageFlag());
-                }
-                else
-                {
-                    Debug.LogWarning("No valid position saved. Restarting Level");
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                }
-
-                _hasTakenDamage = true;
-            }
+            HandlePlayerFall(other.gameObject);
         }
     }
 
-    private IEnumerator ResetDamageFlag()
+    private void HandlePlayerFall(GameObject player)
     {
-        // Aspetta 2 frame per assicurarsi che il player sia stato teletrasportato
-        yield return null;
-        yield return null;
-        _hasTakenDamage = false;
+        // Trova il LifeController e applica il danno
+        LifeController playerLifeController = player.GetComponentInParent<LifeController>();
+
+        if (playerLifeController != null)
+        {
+            int currentHp = playerLifeController.GetHp();
+            int newHp = currentHp - _dmgOnFall;
+
+            if (newHp > 0)
+            {
+                // Il player sopravvive, applica danno e respawn
+                playerLifeController.TakeDamage(_dmgOnFall);
+
+                // Trova il componente PlayerSpawn e respawn alla sua spawnPos (già impostata dal SaveTrigger)
+                SpawnPositionHandler playerSpawn = player.GetComponentInParent<SpawnPositionHandler>();
+                if (playerSpawn != null)
+                {
+                    playerSpawn.RespawnAtCheckpoint();
+                    Debug.Log($"Player fell! HP: {currentHp} -> {newHp}. Respawned at checkpoint.");
+                }
+                else
+                {
+                    Debug.LogError("PlayerSpawn component not found on player!");
+                }
+            }
+            else
+            {
+                // Il player muore, applica solo il danno e lascia che il LifeController gestisca
+                playerLifeController.TakeDamage(_dmgOnFall);
+                Debug.Log("Player fell and died!");
+            }
+        }
+        else
+        {
+            Debug.LogError("LifeController not found on player!");
+        }
     }
 }

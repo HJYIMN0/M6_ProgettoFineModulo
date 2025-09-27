@@ -49,4 +49,20 @@ public class GameManager : AbstractSingleton<GameManager>
             Debug.LogError("WinningTrigger not found in the scene.");
         }
     }
+    public void Start()
+    {
+        // Carica i dati salvati
+        SaveData data = SaveSystem.Load();
+        if (data != null && (data.playerPosX != 0 || data.playerPosY != 0 || data.playerPosZ != 0))
+        {
+            // Applica posizione salvata al player
+            SaveSystem.SetGameObjectPosition(Player, data.playerPosX, data.playerPosY, data.playerPosZ);
+
+            // Applica HP salvati al player
+            LifeController lifeController = Player.GetComponentInParent<LifeController>();
+            lifeController.SetHp(data.hp);
+            lifeController.SetMaxHp(data.maxHp);
+        }
+    }
+
 }

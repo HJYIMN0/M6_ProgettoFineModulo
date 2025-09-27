@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class CoinManager : MonoBehaviour
     private GameManager gameManager => GameManager.Instance;
     private SaveData saveData => gameManager.SaveData;
     private WinningTrigger winningTrigger => gameManager.WinningTrigger;
+
+    public Action<int, int> OnCoinCollected;
 
     public void Start()
     {
@@ -64,6 +67,7 @@ public class CoinManager : MonoBehaviour
             collectedCoins = 0; // Reset collected coins for potential replay
             saveData.totalCollectedCoins += collectedCoins;
         }
+        OnCoinCollected?.Invoke(collectedCoins, totalCoins);
         SaveSystem.Save(saveData);
     }
 }

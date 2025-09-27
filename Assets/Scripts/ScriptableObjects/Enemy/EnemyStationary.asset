@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7571adfeb6b8e1044990d7d35155794f, type: 3}
   m_Name: EnemyStationary
   m_EditorClassIdentifier: 
-  _gizmoRadius: 10
+  _gizmoRadius: 15.7
   _rotationSpeed: 5
   _playerLayer:
     serializedVersion: 2

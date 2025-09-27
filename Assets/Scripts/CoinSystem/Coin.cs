@@ -45,7 +45,7 @@ public class Coin : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponentInParent<PlayerJumpController>().SetSecondJump(true);
-            other.GetComponentInParent<PlayerJumpController>()._onSecondJump?.Invoke(true);
+            other.GetComponentInParent<PlayerJumpController>().OnSecondJump?.Invoke(true);
 
             if (!_isCollected)
             {

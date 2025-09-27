@@ -4,7 +4,9 @@ using UnityEngine.SceneManagement;
 public class WinningTrigger : MonoBehaviour
 {
     [SerializeField] private WinningUI _winningUI;
-    private bool _hasCollectedAllCoins = false;
+    private bool _collectedAllCoins = false;
+
+    public bool CollectedAllCoins => _collectedAllCoins;
 
     public void Awake()
     {
@@ -23,7 +25,7 @@ public class WinningTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!_hasCollectedAllCoins)
+            if (!_collectedAllCoins)
             {
                 Debug.Log("Non hai raccolto tutte le monete!");
                 return;
@@ -41,7 +43,7 @@ public class WinningTrigger : MonoBehaviour
 
     public void SetHasCollectedAllCoins(bool value)
     {
-        if (value != _hasCollectedAllCoins)
-            _hasCollectedAllCoins = value;
+        if (value != _collectedAllCoins)
+            _collectedAllCoins = value;
     }
 }
