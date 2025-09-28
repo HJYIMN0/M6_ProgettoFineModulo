@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class GameManager : AbstractSingleton<GameManager>
 {
-    public TimeManager TimeManager {  get; private set; }
+    public TimeManager TimeManager { get; private set; }
     public GameObject Player { get; private set; }
     public CoinManager CoinManager { get; private set; }
-
     public Timer Timer { get; private set; }
     public SaveData SaveData { get; private set; }
 
@@ -16,12 +14,9 @@ public class GameManager : AbstractSingleton<GameManager>
     public override bool IsDestroyedOnLoad() => true;
     public override bool ShouldDetatchFromParent() => true;
 
-    public override void Awake()
+
+    public void OnEnable()
     {
-        base.Awake();
-
-
-        Debug.Log("GameManager started.");
 
         Player = GameObject.FindWithTag("Player");
         if (Player == null)
@@ -55,9 +50,6 @@ public class GameManager : AbstractSingleton<GameManager>
         {
             Debug.LogError("Timer not found in scene");
         }
-    }
-    public void Start()
-    {
         // Carica i dati salvati
         SaveData data = SaveSystem.Load();
         if (data != null && (data.playerPosX != 0 || data.playerPosY != 0 || data.playerPosZ != 0))
@@ -71,5 +63,4 @@ public class GameManager : AbstractSingleton<GameManager>
             lifeController.SetMaxHp(data.maxHp);
         }
     }
-
 }

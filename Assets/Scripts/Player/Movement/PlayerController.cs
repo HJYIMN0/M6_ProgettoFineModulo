@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
             // Decelera la velocità angolare fino a zero
             _rb.angularVelocity = Vector3.Lerp(_rb.angularVelocity, Vector3.zero, _speedDeceleration * Time.fixedDeltaTime);
 
-            if (_rb.velocity.magnitude <= Mathf.Epsilon) OnFullStop.Invoke();
+            if (_rb.velocity.magnitude <= Mathf.Epsilon) OnFullStop?.Invoke();
         }
     }
 

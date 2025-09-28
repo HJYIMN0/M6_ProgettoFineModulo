@@ -10,16 +10,18 @@ public class MovablePlatform : MonoBehaviour, iMovable
     [SerializeField] private float waitTime = 5f;
 
     [Header("Meshes settings")]
-    [SerializeField] private Transform movableMesh;
+    [SerializeField] private Transform movableMesh; 
     [SerializeField] private Transform[] desiredPos;
 
     [Header("Player Detection")]
-    [SerializeField] private bool requiresPlayer = true; // Se true, aspetta il player per iniziare
+    [SerializeField] private bool requiresPlayer = true; //PlayerTrigger
 
     private int _posIndex;
     private float _waitTimer = 0f;
     private bool _isWaiting;
     private bool _hasStartedMoving = false;
+    private bool _firstMove = true;
+
 
     private void Start()
     {
@@ -36,11 +38,8 @@ public class MovablePlatform : MonoBehaviour, iMovable
 
     private void Update()
     {
-        // Se richiede il player e non ha ancora iniziato, non fare nulla
         if (requiresPlayer && !_hasStartedMoving)
-        {
             return;
-        }
 
         if (_isWaiting)
         {
@@ -49,21 +48,30 @@ public class MovablePlatform : MonoBehaviour, iMovable
             {
                 _isWaiting = false;
                 _waitTimer = 0f;
-                _posIndex = (_posIndex + 1) % desiredPos.Length; // Correzione: rimosso *
+                _posIndex = (_posIndex + 1) % desiredPos.Length;
             }
         }
         else
         {
-            // Mi sto muovendo verso il target
             Transform target = desiredPos[_posIndex];
             Move(movableMesh.transform.position, target.position, speed);
+
             if (Vector3.Distance(movableMesh.transform.position, target.position) < 0.1f)
             {
-                // Appena raggiunto, inizio la fase di attesa
-                _isWaiting = true;
+                // Solo dopo la prima volta entra in attesa
+                if (!_firstMove)
+                {
+                    _isWaiting = true;
+                }
+                else
+                {
+                    _firstMove = false; // consumato il "bonus" di partenza immediata
+                    _posIndex = (_posIndex + 1) % desiredPos.Length; // vai subito al prossimo target
+                }
             }
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -71,19 +79,19 @@ public class MovablePlatform : MonoBehaviour, iMovable
         {
             Debug.Log("Player detected! Platform starting movement...");
             _hasStartedMoving = true;
-            _isWaiting = false; // Prima volta: inizia subito a muoversi
+            _isWaiting = false;
             _waitTimer = 0f;
+            _posIndex = 0;
+            _firstMove = true; // only 1st time
         }
     }
 
-    // Rimosso OnTriggerExit - non serve più
 
     public void Move(Vector3 currentPos, Vector3 targetPos, float speed)
     {
         movableMesh.transform.position = Vector3.MoveTowards(currentPos, targetPos, speed * Time.deltaTime);
     }
 
-    // Metodo per resettare la piattaforma (opzionale)
     public void ResetPlatform()
     {
         _posIndex = 0;
