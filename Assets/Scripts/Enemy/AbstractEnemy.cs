@@ -24,8 +24,9 @@ public class AbstractEnemy : MonoBehaviour
                 break;
 
             case CheckerShape.RectangularBox:
-                Vector3 height = new Vector3(3, 1 * enemyData.GizmoRadius, 3);
-                Gizmos.DrawWireCube(transform.position, height);
+                Vector3 size = new Vector3(3, 1 * enemyData.GizmoRadius, 3);
+                Gizmos.matrix = transform.localToWorldMatrix;
+                Gizmos.DrawWireCube(Vector3.zero, size);
                 break;
         }
     }
@@ -47,7 +48,7 @@ public class AbstractEnemy : MonoBehaviour
 
             case CheckerShape.RectangularBox:
                 Vector3 boxSize = new Vector3(3, 1 * enemyData.GizmoRadius, 3);
-                playersInRange = Physics.OverlapBox(transform.position, boxSize, transform.rotation, enemyData.PlayerLayer);
+                playersInRange = Physics.OverlapBox(transform.position, boxSize * 0.5f, transform.rotation, enemyData.PlayerLayer);
                 break;
         }
 

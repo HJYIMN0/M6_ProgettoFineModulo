@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class Coin : MonoBehaviour
@@ -34,7 +36,6 @@ public class Coin : MonoBehaviour
             Debug.LogError($"{this.gameObject.name} could not find the GameManager!");
             return;
         }
-        _isCollected = false;
         if (_coinManager == null)
         {
             Debug.LogError($"{gameObject.name} can't find CoinManager in the scene.");
@@ -63,6 +64,11 @@ public class Coin : MonoBehaviour
     private void OnDisable()
     {
         Invoke("SetActiveTrue", _setActiveDelay);
+    }
+
+    public void SetActiveTrue()
+    {
+        gameObject.SetActive(true);
     }
 
     public void SetCoinCollected(bool value) 

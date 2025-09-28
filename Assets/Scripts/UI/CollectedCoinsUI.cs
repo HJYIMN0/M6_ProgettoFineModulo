@@ -13,6 +13,11 @@ public class CollectedCoinsUI : MonoBehaviour
         DisplayCoin(GameManager.Instance.CoinManager.CollectedCoins, GameManager.Instance.CoinManager.TotalCoins);
     }
 
+    public void CallDisplayCoin()
+    {
+        DisplayCoin(GameManager.Instance.CoinManager.CollectedCoins, GameManager.Instance.CoinManager.TotalCoins);
+    }
+
 
     public void DisplayCoin(int collectedcoins, int totalCoins)
     {
@@ -26,6 +31,16 @@ public class CollectedCoinsUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.Instance.CoinManager.OnCoinCollected -= DisplayCoin;
+        if (GameManager.Instance.CoinManager != null)
+        {
+            GameManager.Instance.CoinManager.OnCoinCollected -= DisplayCoin;
+        }
     }
+
+    public void ShowText()
+    {
+        //Debug.Log("Called!");
+        _coinText.text = "First you must collect all coins!";
+    }
+
 }

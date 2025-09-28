@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class WinningTrigger : MonoBehaviour
@@ -7,6 +8,9 @@ public class WinningTrigger : MonoBehaviour
     private bool _collectedAllCoins = false;
 
     public bool CollectedAllCoins => _collectedAllCoins;
+
+    public UnityEvent OnEnterWithNotEnoughCoins;
+    public UnityEvent OnDisplayCoins;
 
     public void Awake()
     {
@@ -28,6 +32,9 @@ public class WinningTrigger : MonoBehaviour
             if (!_collectedAllCoins)
             {
                 Debug.Log("Non hai raccolto tutte le monete!");
+
+                OnEnterWithNotEnoughCoins?.Invoke();
+
                 return;
             }
 
@@ -47,5 +54,16 @@ public class WinningTrigger : MonoBehaviour
     {
         if (value != _collectedAllCoins)
             _collectedAllCoins = value;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (!_collectedAllCoins)
+            {
+                OnDisplayCoins?.Invoke();
+            }
+        }
     }
 }

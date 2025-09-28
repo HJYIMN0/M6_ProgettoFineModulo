@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 5709883260573846525}
   - component: {fileID: 6841373928038686593}
   - component: {fileID: 152529853661212288}
+  - component: {fileID: 9117749631459985027}
   m_Layer: 7
   m_Name: Logic
   m_TagString: Player
@@ -173,6 +174,18 @@ MonoBehaviour:
   _rb: {fileID: 8689745909461691667}
   _playerInput: {fileID: 2053256314053631136}
   _lifeController: {fileID: 6841373928038686593}
+--- !u!114 &9117749631459985027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215402199628052885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc811cf93c119e4b8d9d8f4e2e9a06b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1124664242929447363
 GameObject:
   m_ObjectHideFlags: 0
